@@ -38,38 +38,29 @@ const Header = ({ userId, onMenuClick }) => {
           <ul id="mainMenu" className="dFlex">
             <li className="whisky" onClick={() => onMenuClick("whisky")}>
               위스키
-              <ul className="subMenus">
-                <li className="whisky">임페리얼</li>
-                <li className="whisky">패스포트</li>
-              </ul>
+              <ul className="subMenus"></ul>
             </li>
             <li className="wine" onClick={() => onMenuClick("wine")}>
               와인
-              <ul className="subMenus">
-                <li className="wine">무똥까네</li>
-              </ul>
+              <ul className="subMenus"></ul>
             </li>
             <li className="vodca" onClick={() => onMenuClick("vodca")}>
               보드카
-              <ul className="subMenus">
-                <li className="vodca">앱솔루트</li>
-              </ul>
+              <ul className="subMenus"></ul>
             </li>
             <li
               className="traditional"
               onClick={() => onMenuClick("traditional")}
             >
               전통주
-              <ul className="subMenus">
-                <li className="traditional">고운달</li>
-                <li className="traditional">문배</li>
-              </ul>
+              <ul className="subMenus"></ul>
             </li>
             <li id="board" className="bbs">
               게시판
               <ul className="subMenus">
                 <li className="notice">공지사항</li>
                 <li className="bbs">문의사항</li>
+                <li className="free">자유게시판</li>
               </ul>
             </li>
           </ul>
