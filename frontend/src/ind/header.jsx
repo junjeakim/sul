@@ -11,7 +11,13 @@ const Header = ({ userId, onMenuClick }) => {
           <input type="text" id="searchKey" name="search" />
           <button>검색</button>
         </div>
-        <a href="/">
+        <a
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            onMenuClick("main");
+          }}
+        >
           <img alt="Logo" src={require("../images/Logo-removebg.png")} />
         </a>
         <div id="H_btnArea">
@@ -58,9 +64,15 @@ const Header = ({ userId, onMenuClick }) => {
             <li id="board" className="bbs">
               게시판
               <ul className="subMenus">
-                <li className="notice">공지사항</li>
-                <li className="bbs">문의사항</li>
-                <li className="free">자유게시판</li>
+                <li className="notice" onClick={() => onMenuClick("notice")}>
+                  공지사항
+                </li>
+                <li className="bbs" onClick={() => onMenuClick("inquiry")}>
+                  문의사항
+                </li>
+                <li className="free" onClick={() => onMenuClick("board")}>
+                  자유게시판
+                </li>
               </ul>
             </li>
           </ul>

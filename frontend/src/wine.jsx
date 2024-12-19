@@ -48,7 +48,7 @@ const WinePage = () => {
       ].join(""),
     },
     {
-      name: "로스 바스코스 차구알 까베르네 소비뇽 (750ml)",
+      name: "차구알 까베르네 소비뇽 (750ml)",
       price: "35,000원",
       originalPrice: "40,000원",
       image: "./images/wine/los_vascos.png",
@@ -59,7 +59,7 @@ const WinePage = () => {
       ].join(""),
     },
     {
-      name: "로스 바스코스 차구알 소비뇽 블랑 (750ml)",
+      name: "차구알 소비뇽 블랑 (750ml)",
       price: "35,000원",
       originalPrice: "40,000원",
       image: "./images/wine/los_vascos_blang.png",
@@ -70,7 +70,7 @@ const WinePage = () => {
       ].join(""),
     },
     {
-      name: "로스 바스코스 샤도네이 (750ml)",
+      name: "샤도네이 (750ml)",
       price: "21,000원",
       originalPrice: "25,000원",
       image: "./images/wine/los_vascos_thato.png",

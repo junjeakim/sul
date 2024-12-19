@@ -1,5 +1,5 @@
+/* 기존 스타일 */
 @charset "UTF-8";
-
 @import url(style_Reset.css);
 
 div#wrap {
@@ -25,19 +25,15 @@ div#slideshow {
 	position: relative;
 }
 
-/* 슬라이드 이미지를 절대 위치로 설정하여 겹치도록 합니다. */
 div#slideshow>img {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
-	/* 슬라이드 이미지의 크기를 조정합니다. */
 	height: auto;
 	display: none;
-	/* 처음에는 모든 이미지를 숨깁니다. */
 }
 
-/* 첫 번째 이미지는 표시합니다. */
 div#slideshow>img:first-child {
 	display: block;
 }
@@ -74,7 +70,6 @@ div.itemTxtarea span {
 
 	.product {
 		flex: 1 1 calc(50% - 10px);
-		/* 한 줄에 2개씩 */
 		max-width: calc(50% - 10px);
 	}
 }
@@ -82,18 +77,167 @@ div.itemTxtarea span {
 @media (max-width: 768px) {
 	.product {
 		flex: 1 1 100%;
-		/* 한 줄에 1개씩 */
 		max-width: 100%;
 	}
 }
 
 span {
 	font-size: 17px;
-	
 }
 
-/* 버튼들의 사용 방향:
-#btnArea 영역 안의 버튼들은 상품 등록, 초기화, 목록 이동 등의 기능을 합니다.
-.home-btn 클래스는 홈으로 이동 버튼에 사용됩니다.
-.delete-btn 클래스는 개별 상품 삭제 버튼에 사용됩니다.
-*/
+/* 추가할 스타일 */
+.product-card-small {
+	width: 250px;
+	height: 250px;
+	border: 1px solid transparent;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s, box-shadow 0.3s;
+	position: relative;
+	cursor: pointer;
+}
+
+.product-card-small:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.product-card-small::before,
+.product-card-small::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	background: transparent;
+	transition: width 0.5s, height 0.5s;
+}
+
+.product-card-small::before {
+	top: 0;
+	left: 0;
+	border-top: 4px solid #08f;
+	border-left: 4px solid #08f;
+}
+
+.product-card-small::after {
+	bottom: 0;
+	right: 0;
+	border-bottom: 4px solid #08f;
+	border-right: 4px solid #08f;
+}
+
+.product-card-small:hover::before {
+	width: 100%;
+	height: 100%;
+}
+
+.product-card-small:hover::after {
+	width: 100%;
+	height: 100%;
+}
+
+.product-image {
+	width: 100%;
+	height: 75%;
+	object-fit: contain;
+}
+
+.main-product-image {
+	width: 100%;
+	height: 438.96px;
+	object-fit: cover;
+}
+
+.product-info {
+	padding: 16px;
+	text-align: center;
+}
+
+p {
+	font-size: 17px;
+	font-weight: bold;
+}
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal-content {
+	display: flex;
+	background: white;
+	border-radius: 10px;
+	padding: 20px;
+	width: 1200px;
+	height: 600px;
+	position: relative;
+}
+
+.modal-left {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px;
+}
+
+.modal-image {
+	width: 520px;
+	height: 520px;
+	object-fit: contain;
+}
+
+.modal-right {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-left: 20px;
+	margin: 20px;
+}
+
+.modal-title {
+	font-size: 32px;
+	margin-bottom: 10px;
+}
+
+.modal-price {
+	font-size: 24px;
+	margin-bottom: 15px;
+}
+
+.modal-price .original-price {
+	text-decoration: line-through;
+	color: gray;
+}
+
+.modal-price .discount-price {
+	color: #e53935;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.modal-description {
+	margin-top: 10px;
+	font-size: 18px;
+	line-height: 1.5;
+}
+
+.custom-divider {
+	border: none;
+	border-top: 2px solid #08f;
+	margin: 10px 0;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+span {
+	font-size: 17px;
+}

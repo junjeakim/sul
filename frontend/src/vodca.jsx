@@ -25,7 +25,7 @@ const VodcaPage = () => {
       ].join(""),
     },
     {
-      name: "엡솔루트 보드카(칵테일) (750ml)",
+      name: "앱솔루트 보드카(칵테일) (750ml)",
       price: "26,000원",
       originalPrice: "35,000원",
       image: "./images/bodca/absolute_mandrin.png",
