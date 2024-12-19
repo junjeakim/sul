@@ -1,0 +1,164 @@
+@charset "UTF-8";
+@import url('./style_Reset.css');
+
+header#header {
+	width: 100%;
+}
+
+div#h_top {
+	width: 100%;
+	align-items: center;
+	padding: 0 150px;
+	justify-content: space-between;
+	padding: 0 150px;
+	background-color: #86592d;
+	border-bottom: 1px solid #96402d;
+}
+
+div#btnArea>button,
+div#searchArea button {
+	font-size: 18px;
+	padding: 4px 10px;
+}
+
+div#h_bottom {
+	padding: 15px 0;
+	align-items: center;
+	justify-content: center;
+
+}
+
+div#mainMenus>ul>li {
+	position: relative;
+	/* 	border: 1px solid #000; */
+	margin: 0 20px;
+}
+
+li {
+	width: 130px;
+	font-size: 20px;
+	padding: 5px 12px;
+	text-align: center;
+}
+
+#mainMenu>li {
+	cursor: pointer;
+}
+
+
+#mainMenu .subMenus {
+	display: none;
+	position: absolute;
+	padding: 5px 4px;
+	top: 29px;
+	left: -5px;
+	position: absolute;
+	z-index: 1;
+}
+
+#mainMenu .subMenus>li {
+	/* 	border: 1px solid #ccc; */
+	padding: 8px 10px;
+	background-color: rgba(255, 255, 255, 0.6);
+	cursor: pointer;
+}
+
+#mainMenu .subMenus>li:hover {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* 버튼 영역 */
+#btnArea {
+	text-align: center;
+}
+
+/* 상품 등록 버튼 */
+#H_btnArea button {
+	background-color: #8B0000;
+	/* 기본 버튼 배경색: 하늘색 */
+	color: #fff;
+	border: none;
+	padding: 8px 30px;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 5px;
+	/*   margin: 10px; */
+	transition: background-color 0.3s ease;
+	/* 호버 시 배경색 전환 효과 */
+}
+
+/* 등록버튼 하버 */
+#H_btnArea button:hover {
+	background-color: #B22222;
+	/* 하늘색 버튼 hover */
+}
+
+/* 홈으로 이동 버튼 */
+#H_btnArea .home-btn {
+	background-color: #8B0000;
+	/* 홈으로 이동 버튼 배경색: 와인색 */
+}
+
+/* 홈버튼 하버 */
+#H_btnArea .home-btn:hover {
+	background-color: #B22222;
+	/* 진한 와인색 hover */
+}
+
+/* 삭제 버튼 */
+.delete-btn {
+	background-color: #d9534f;
+	/* 삭제 버튼 배경색: 빨강 */
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-size: 1em;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+	/* 호버 시 배경색 전환 효과 */
+}
+
+/* 삭제버튼 하버 */
+.delete-btn:hover {
+	background-color: #c9302c;
+	/* 빨간색 버튼 hover */
+}
+
+@media (max-width : 1300px) {
+
+	#H_btnArea {
+		width: 400px;
+	}
+}
+
+/* 각 항목에 대해 개별적으로 설정 */
+#mainMenu .whisky:hover,
+#mainMenu .wine:hover,
+#mainMenu .bodca:hover,
+#mainMenu .traditional:hover,
+#mainMenu .bbs:hover {
+	border: 2px solid transparent;
+	position: relative;
+}
+
+/* 각 항목에 대해 개별적으로 설정 */
+#mainMenu .whisky,
+#mainMenu .wine,
+#mainMenu .vodca,
+#mainMenu .traditional,
+#mainMenu .bbs {
+	transition: background-color 1s ease, color 1s ease;
+	/* 배경색과 글자색 변화에 1초의 시간을 줍니다 */
+}
+
+#mainMenu .whisky:hover,
+#mainMenu .wine:hover,
+#mainMenu .vodca:hover,
+#mainMenu .traditional:hover,
+#mainMenu .bbs:hover {
+	background-color: #86592d;
+	/* 배경색을 새로운 색상으로 변경 */
+	color: #fff;
+	/* 글자색을 하얀색으로 변경 */
+}

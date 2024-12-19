@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+@import url(style_Reset.css);
+
+div#wrap {
+	width: 100%;
+	border-radius: 4px;
+	margin: 0 auto;
+}
+
+h1 {
+	margin: 30px 0;
+	text-indent: 40px;
+}
+
+h2 {
+	text-align: center;
+	margin: 10px 0 20px;
+}
+
+div#slideshow {
+	width: 1000px;
+	height: 600px;
+	margin: 10px auto;
+	position: relative;
+}
+
+/* 슬라이드 이미지를 절대 위치로 설정하여 겹치도록 합니다. */
+div#slideshow>img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	/* 슬라이드 이미지의 크기를 조정합니다. */
+	height: auto;
+	display: none;
+	/* 처음에는 모든 이미지를 숨깁니다. */
+}
+
+/* 첫 번째 이미지는 표시합니다. */
+div#slideshow>img:first-child {
+	display: block;
+}
+
+div#itemListArea {
+	width: 100%;
+	margin: 0 auto;
+	justify-content: center;
+}
+
+div#item {
+	margin: 0 20px;
+}
+
+div.itemImgArea {
+	margin-bottom: 8px;
+}
+
+div.itemImgArea>img {
+	width: 140px;
+	height: 160px;
+}
+
+div.itemTxtarea span {
+	padding: 2px 8px;
+	display: block;
+	text-align: center;
+}
+
+@media (max-width: 1300px) {
+	div#wrap {
+		width: 1300px;
+	}
+
+	.product {
+		flex: 1 1 calc(50% - 10px);
+		/* 한 줄에 2개씩 */
+		max-width: calc(50% - 10px);
+	}
+}
+
+@media (max-width: 768px) {
+	.product {
+		flex: 1 1 100%;
+		/* 한 줄에 1개씩 */
+		max-width: 100%;
+	}
+}
+
+span {
+	font-size: 17px;
+	
+}
+
+/* 버튼들의 사용 방향:
+#btnArea 영역 안의 버튼들은 상품 등록, 초기화, 목록 이동 등의 기능을 합니다.
+.home-btn 클래스는 홈으로 이동 버튼에 사용됩니다.
+.delete-btn 클래스는 개별 상품 삭제 버튼에 사용됩니다.
+*/
