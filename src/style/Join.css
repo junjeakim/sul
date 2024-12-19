@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+@import url(style_Reset.css);
+
+.join_area form {
+   width: 700px;
+   margin: 50px auto;
+   padding: 20px;
+   background-color: #fff;
+   border-radius: 4px;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.join_area h1 {
+   text-align: center;
+   margin: 15px 0;
+}
+
+.join_area h2 {
+   color: #555;
+   font-size: 1.1em;
+   margin: 10px 0 20px 6% !important;
+   text-align: left !important;
+}
+
+.join_area .sample-table {
+   width: 80%;
+   border-collapse: collapse;
+   margin-left: 6%;
+}
+
+.join_area .sample-table tr > td.title {
+   width: 30%;
+   font-weight: bold;
+   text-indent: 20px;
+}
+
+.join_area input[type='text'],
+.join_area input[type='password'],
+.join_area input[type='date'],
+.join_area input[type='tel'],
+.join_area select {
+   width: 70%;
+   padding: 4px 8px 5px;
+   margin: 10px;
+   font-size: 12px;
+   border: none;
+   border-radius: 4px;
+   background-color: #ffcccc;
+}
+
+.join_area .email-container {
+   display: flex;
+   align-items: center;
+   gap: 3px;
+}
+
+.join_area .email-container input[type='text'] {
+   width: 100px;
+   padding: 5px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+}
+
+.join_area .email-container i {
+   font-size: 1em;
+   color: #555;
+}
+
+.join_area .email-container select {
+   width: 120px;
+   padding: 5px;
+   border: none;
+   border-radius: 4px;
+}
+
+.join_area .input-container {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
+.join_area .textArea {
+   width: 200px;
+   padding: 8px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   box-sizing: border-box;
+}
+
+.join_area .textbtn {
+   padding: 6px 10px;
+   background-color: #007bff;
+   color: #fff;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+}
+
+.join_area .textbtn:hover {
+   background-color: #0056b3;
+}
+
+.join_area #btn {
+   padding: 10px;
+   text-align: center;
+}
+.join_area button.btnArea {
+   padding: 3px 15px;
+   background-color: #007bff;
+   color: #fff;
+   border: none;
+   border-radius: 3px;
+   cursor: pointer;
+   font-size: 1em;
+}
+
+.join_area button:hover {
+   background-color: #0056b3;
+}
