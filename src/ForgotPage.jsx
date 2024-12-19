@@ -24,7 +24,7 @@ const ForgotPage = () => {
             </label>
             <label>
                <input type="radio" name="findType" value="비밀번호" checked={findType === '비밀번호'} onChange={handleRadioChange} />
-               비밀번호 찾기    
+               비밀번호 찾기
             </label>
             <hr />
          </div>
@@ -58,6 +58,6 @@ const ForgotPage = () => {
          </p>
       </div>
    )
-}
+} //수정 조금 필요
 
 export default ForgotPage
