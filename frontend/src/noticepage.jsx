@@ -80,16 +80,18 @@ const NoticePage = () => {
         </tbody>
       </table>
       {selectedNotice && (
-        <div className="modal">
-          <div className="modal-content">
+        <div className="notice-modal">
+          <div className="notice-modal-content">
             <h2>{selectedNotice.title}</h2>
-            <div className="modal-body">
+            <div className="notice-modal-body">
               <p>{selectedNotice.content}</p>
             </div>
-            <div className="post-footer">작성일: {selectedNotice.date}</div>
+            <div className="notice-post-footer">
+              작성일: {selectedNotice.date}
+            </div>
             <button
               onClick={() => setSelectedNotice(null)}
-              className="close-btn"
+              className="notice-close-btn"
             >
               닫기
             </button>

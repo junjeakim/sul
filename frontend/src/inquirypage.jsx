@@ -61,9 +61,9 @@ const InquiryPage = () => {
   };
 
   return (
-    <div className="board-page">
+    <div className="inquiry-board-page">
       <h1>문의사항</h1>
-      <table className="post-table">
+      <table className="inquiry-post-table">
         <thead>
           <tr>
             <th>제목</th>
@@ -88,7 +88,7 @@ const InquiryPage = () => {
               <td>
                 <button
                   onClick={() => handleDelete(inquiry.id)}
-                  className="delete-btn"
+                  className="inquiry-delete-btn"
                 >
                   삭제
                 </button>
@@ -100,18 +100,18 @@ const InquiryPage = () => {
 
       {/* 선택된 문의사항 내용 표시 */}
       {selectedInquiry && (
-        <div className="modal">
-          <div className="modal-content">
+        <div className="inquiry-modal">
+          <div className="inquiry-modal-content">
             <h2>{selectedInquiry.title}</h2>
-            <div className="modal-body">
+            <div className="inquiry-modal-body">
               <p>{selectedInquiry.content}</p>
             </div>
-            <div className="post-footer">
+            <div className="inquiry-post-footer">
               {selectedInquiry.author} | {selectedInquiry.date}
             </div>
             <button
               onClick={() => setSelectedInquiry(null)}
-              className="close-btn"
+              className="inquiry-close-btn"
             >
               닫기
             </button>
@@ -119,7 +119,7 @@ const InquiryPage = () => {
         </div>
       )}
       {isWriting && (
-        <form onSubmit={handleSubmit} className="write-form">
+        <form onSubmit={handleSubmit} className="inquiry-write-form">
           <select
             value={inquiryType}
             onChange={(e) => setInquiryType(e.target.value)}
@@ -153,7 +153,7 @@ const InquiryPage = () => {
             onChange={(e) => setContent(e.target.value)}
             required
           ></textarea>
-          <div className="form-buttons">
+          <div className="inquiry-form-buttons">
             <button type="submit">등록</button>
             <button type="button" onClick={handleCancelClick}>
               취소
@@ -162,7 +162,7 @@ const InquiryPage = () => {
         </form>
       )}
       {!isWriting && (
-        <button onClick={handleWriteClick} className="write-btn">
+        <button onClick={handleWriteClick} className="inquiry-write-btn">
           글쓰기
         </button>
       )}

@@ -57,9 +57,9 @@ const BoardPage = () => {
   };
 
   return (
-    <div className="board-page">
+    <div className="board-board-page">
       <h1>자유게시판</h1>
-      <table className="post-table">
+      <table className="board-post-table">
         <thead>
           <tr>
             <th>제목</th>
@@ -81,7 +81,7 @@ const BoardPage = () => {
               <td>
                 <button
                   onClick={() => handleDelete(post.id)}
-                  className="delete-btn"
+                  className="board-delete-btn"
                 >
                   삭제
                 </button>
@@ -91,23 +91,26 @@ const BoardPage = () => {
         </tbody>
       </table>
       {selectedPost && (
-        <div className="modal">
-          <div className="modal-content">
+        <div className="board-modal">
+          <div className="board-modal-content">
             <h2>{selectedPost.title}</h2>
-            <div className="modal-body">
+            <div className="board-modal-body">
               <p>{selectedPost.content}</p>
             </div>
-            <div className="post-footer">
+            <div className="board-post-footer">
               {selectedPost.author} | {selectedPost.date}
             </div>
-            <button onClick={() => setSelectedPost(null)} className="close-btn">
+            <button
+              onClick={() => setSelectedPost(null)}
+              className="board-close-btn"
+            >
               닫기
             </button>
           </div>
         </div>
       )}
       {isWriting && (
-        <form onSubmit={handleSubmit} className="write-form">
+        <form onSubmit={handleSubmit} className="board-write-form">
           <input
             type="text"
             placeholder="이름"
@@ -128,7 +131,7 @@ const BoardPage = () => {
             onChange={(e) => setContent(e.target.value)}
             required
           ></textarea>
-          <div className="form-buttons">
+          <div className="board-form-buttons">
             <button type="submit">등록</button>
             <button type="button" onClick={handleCancelClick}>
               취소
@@ -137,7 +140,7 @@ const BoardPage = () => {
         </form>
       )}
       {!isWriting && (
-        <button onClick={handleWriteClick} className="write-btn">
+        <button onClick={handleWriteClick} className="board-write-btn">
           글쓰기
         </button>
       )}

@@ -24,12 +24,12 @@ const Footer = () => {
         <p>COPYRIGHT BY DRINKS INTERNATIONAL. All Rights Reserved.</p>
       </div>
       <div id="adminArea">
-        <a href="#" onClick={goAdmin}>
+        <button onClick={goAdmin} className="adminButton">
           <img
             src={require("../images/goAdmin_200.jpg")}
             alt="관리자 페이지로 이동"
           />
-        </a>
+        </button>
       </div>
     </footer>
   );

@@ -118,7 +118,7 @@ h1 {
 }
 
 /* 선택된 공지사항 내용 표시 영역 스타일 정의 */
-.modal {
+.notice-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -130,7 +130,7 @@ h1 {
     align-items: center;
 }
 
-.modal-content {
+.notice-modal-content {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
@@ -143,19 +143,19 @@ h1 {
     flex-direction: column;
 }
 
-.modal-content h2 {
+.notice-modal-content h2 {
     margin-top: 0;
     text-align: center;
 }
 
 /* 모달 내용 스타일 정의 */
-.modal-body {
+.notice-modal-body {
     flex: 1;
     margin: 20px 0;
 }
 
 /* 선택된 공지사항 작성일 스타일 정의 */
-.post-footer {
+.notice-post-footer {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
@@ -164,7 +164,7 @@ h1 {
 }
 
 /* 닫기 버튼 스타일 정의 */
-.close-btn {
+.notice-close-btn {
     margin-top: 20px;
     padding: 10px 20px;
     background-color: #007bff;
