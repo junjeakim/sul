@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2c3e39ee.css",
+    "main.js": "/static/js/main.4d89f1ab.js",
+    "static/js/453.8ab44547.chunk.js": "/static/js/453.8ab44547.chunk.js",
+    "static/media/slide02.jpg": "/static/media/slide02.8e1d2fcfa92a29e154f3.jpg",
+    "static/media/slide01.jpg": "/static/media/slide01.96387b186b41159db850.jpg",
+    "static/media/Imperial19.png": "/static/media/Imperial19.52699476cccc97934ae6.png",
+    "static/media/Imperial21.jpg": "/static/media/Imperial21.23adb1c6e68da83cdffb.jpg",
+    "static/media/Imperial17.jpg": "/static/media/Imperial17.7128adcda588426cfc96.jpg",
+    "static/media/goAdmin_200.jpg": "/static/media/goAdmin_200.9e88110361c9f5017db9.jpg",
+    "index.html": "/index.html",
+    "main.2c3e39ee.css.map": "/static/css/main.2c3e39ee.css.map",
+    "main.4d89f1ab.js.map": "/static/js/main.4d89f1ab.js.map",
+    "453.8ab44547.chunk.js.map": "/static/js/453.8ab44547.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2c3e39ee.css",
+    "static/js/main.4d89f1ab.js"
+  ]
+}
