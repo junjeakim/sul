@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+#wrap {
+   margin: 0 auto;
+   text-align: center;
+}
+
+#Login_wrap {
+   width: 80%;
+   margin: 0 auto;
+   padding: 20px;
+   background-color: #f8f8f8;
+   border-radius: 5px;
+   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+   text-align: center;
+}
+
+.logintop {
+   text-align: center;
+   margin-bottom: 20px;
+}
+
+.logintop h2 {
+   font-size: 24px;
+   color: #333;
+   font-weight: bold;
+}
+
+.login_con {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.login_con input[type='text'],
+.login_con input[type='password'] {
+   width: 200px;
+   height: 40px;
+   padding: 10px;
+   margin: 5px 0;
+   font-size: 14px;
+   color: #333;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   background-color: #f9f9f9;
+}
+
+.login_con span img {
+   width: 20px;
+   margin-right: 10px;
+   vertical-align: middle;
+}
+
+.login_con button {
+   width: 220px;
+   height: 45px;
+   margin-top: 20px;
+   background-color: #333;
+   color: #fff;
+   border: none;
+   border-radius: 5px;
+   font-size: 16px;
+   cursor: pointer;
+   transition: background-color 0.3s;
+}
+
+.login_con button:hover {
+   background-color: #555;
+}
+
+.login_bottom {
+   text-align: center;
+   margin-top: 10px;
+}
+
+.login_bottom p {
+   display: inline-block;
+   font-size: 14px;
+}

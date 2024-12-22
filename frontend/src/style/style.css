@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+@import url(style_Reset.css);
+
+div#wrap {
+   width: 100%;
+   border-radius: 4px;
+   margin: 0 auto;
+}
+h1 {
+   margin: 30px 0;
+   text-indent: 40px;
+}
+h2 {
+   text-align: center;
+   margin: 10px 0 20px;
+}
+
+div#slideshow {
+   width: 1000px;
+   height: 600px;
+   margin: 10px auto;
+   position: relative;
+}
+
+div#slideshow > img {
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+div#itemListArea {
+   width: 100%;
+   margin: 0 auto;
+   justify-content: center;
+}
+div#item {
+   margin: 0 20px;
+}
+div.itemImgArea {
+   margin-bottom: 8px;
+}
+
+div.itemImgArea > img {
+   width: 140px;
+   height: 160px;
+}
+div.itemTxtarea span {
+   padding: 2px 8px;
+   display: block;
+   text-align: center;
+}
+
+@media (max-width: 1300px) {
+   div#wrap {
+      width: 1300px;
+   }
+   .product {
+      flex: 1 1 calc(50% - 10px); /* 한 줄에 2개씩 */
+      max-width: calc(50% - 10px);
+   }
+}
+
+@media (max-width: 768px) {
+   .product {
+      flex: 1 1 100%; /* 한 줄에 1개씩 */
+      max-width: 100%;
+   }
+}
+/* style.css */
+.login-container {
+   max-width: 400px;
+   margin: 50px auto;
+   padding: 20px;
+   border: 1px solid #ddd;
+   border-radius: 8px;
+   background: #f9f9f9;
+}
+
+h2 {
+   text-align: center;
+   margin-bottom: 20px;
+}
+
+.form-group {
+   margin-bottom: 15px;
+}
+
+label {
+   display: block;
+   margin-bottom: 5px;
+   font-weight: bold;
+}
+
+input {
+   width: 100%;
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+}
+
+.error {
+   color: red;
+   font-size: 14px;
+   margin-top: 10px;
+}
+
+.btn-login {
+   width: 100%;
+   padding: 10px;
+   background-color: #007bff;
+   color: white;
+   border: none;
+   border-radius: 4px;
+   font-size: 16px;
+}
+
+.btn-login:hover {
+   background-color: #0056b3;
+}
+
+/* 버튼들의 사용 방향:
+#btnArea 영역 안의 버튼들은 상품 등록, 초기화, 목록 이동 등의 기능을 합니다.
+.home-btn 클래스는 홈으로 이동 버튼에 사용됩니다.
+.delete-btn 클래스는 개별 상품 삭제 버튼에 사용됩니다.
+*/
