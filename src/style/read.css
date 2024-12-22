@@ -1,0 +1,39 @@
+#wrap > main#main > div.bbsRead {
+   width: 860px;
+   padding: 20px;
+   margin: 0 auto;
+}
+
+.bbsRead h2 {
+   text-align: center;
+   padding: 10px;
+   margin-bottom: 10px;
+   background-color: rgba(128, 0, 0, 0.1);
+}
+
+.bbsRead table#readTbl {
+   width: 100%;
+   border-collapse: collapse;
+}
+
+.bbsRead #readTblBody th,
+.bbsRead #readTblBody td {
+   padding: 14px 6px;
+   border-bottom: 1px solid #eee;
+}
+
+.bbsRead #readContentTd {
+   text-align: left;
+   vertical-align: top;
+   height: 160px;
+   padding: 20px;
+   background-color: #fff;
+}
+
+.bbsRead #btnAreaTd button {
+   width: 110px;
+   font-size: 16px;
+   font-weight: bold;
+   padding: 4px 20px;
+   cursor: pointer;
+}
