@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+@import url(style_Reset.css);
+
+body {
+   background-color: #999;
+}
+
+div#wrap {
+   width: 400px;
+   border: 4px solid #ccc;
+   border-radius: 4px;
+   margin: 100px auto;
+}
+
+div#wrap.adminLogin {
+   padding: 20px;
+}
+
+h1 {
+   text-align: center;
+   padding: 20px auto;
+}
+hr {
+   margin: 5px 0;
+}
+
+div#adminFormArea {
+   width: 100%;
+}
+div#adminFormArea > form > label {
+   margin: 15px 0;
+}
+
+label {
+   display: block;
+   text-align: center;
+}
+
+input {
+   width: 100%;
+   font-size: 18px;
+   padding: 4px 6px;
+   display: block;
+   border: 1px solid #ccc;
+   border-radius: 3px;
+   margin: 10px 0;
+}
+div#btnArea {
+   text-align: center;
+}
+button {
+   width: 150px;
+   font-size: 20px;
+   padding: 5px 15px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   margin: 0 2px;
+}
+
+/*adminPage 시작*/
+
+div#mainMenus {
+   width: 250px;
+   border: 1px solid #000;
+}
