@@ -1,0 +1,100 @@
+/* 전체 레이아웃 스타일 */
+#forgot-wrap {
+   width: 400px;
+   margin: 50px auto;
+   padding: 20px;
+   border: 1px solid #ddd;
+   border-radius: 8px;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   background-color: #f9f9f9;
+   font-family: 'Arial', sans-serif;
+   box-sizing: border-box;
+}
+
+#forgot-wrap h2 {
+   text-align: center;
+   font-size: 1.5rem;
+   margin-bottom: 20px;
+   color: #333;
+}
+
+/* 라디오 버튼 영역 */
+#findTypeArea {
+   display: flex;
+   justify-content: center;
+   margin-bottom: 20px;
+}
+
+#findTypeArea label {
+   margin: 0 10px;
+   font-size: 1rem;
+   color: #555;
+}
+
+#findTypeArea input[type='radio'] {
+   margin-right: 5px;
+}
+
+/* 입력 영역 */
+#inputArea {
+   margin-bottom: 20px;
+}
+
+.input-row {
+   display: flex;
+   align-items: center;
+   margin-bottom: 15px;
+}
+
+.input-row label {
+   width: 80px;
+   font-size: 1rem;
+   color: #555;
+}
+
+.input-row input[type='text'],
+.input-row input[type='email'] {
+   flex: 1;
+   padding: 8px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   font-size: 1rem;
+   box-sizing: border-box;
+   margin-left: 10px;
+}
+
+.input-row input[type='email']:nth-child(3) {
+   margin: 0 10px;
+}
+
+/* 버튼 영역 */
+#btnArea {
+   text-align: center;
+}
+
+#btnArea button {
+   padding: 10px 20px;
+   background-color: #007bff;
+   color: #fff;
+   border: none;
+   border-radius: 4px;
+   font-size: 1rem;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+#btnArea button:hover {
+   background-color: #0056b3;
+}
+
+/* 정보 텍스트 */
+#infoText {
+   text-align: center;
+   font-size: 0.9rem;
+   color: #555;
+}
+
+#infoText .highlight {
+   color: #007bff;
+   font-weight: bold;
+}

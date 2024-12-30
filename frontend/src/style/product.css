@@ -1,0 +1,204 @@
+.product-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.title {
+    width: 100%;
+    text-align: left;
+    margin-left: 150px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.product-card {
+    width: 400px;
+    height: 400px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.product-image {
+    width: 100%;
+    height: 75%;
+    object-fit: contain;
+}
+
+.main-product-image {
+    width: 100%;
+    height: 438.96px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 16px;
+    text-align: center;
+}
+
+p {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    display: flex;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    /* max-width: 1200px; */
+    /* 최대 가로 폭을 넓게 설정 */
+    width: 1200px;
+    height: 600px;
+    /* 세로 높이를 늘림 */
+    position: relative;
+}
+
+.modal-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    /* 가로 세로 여백 20px */
+}
+
+.modal-image {
+    width: 520px;
+    /* 부모 요소에 맞게 채우기 */
+    height: 520px;
+    /* 부모 요소에 맞게 채우기 */
+    object-fit: contain;
+    /* 이미지 비율을 유지하며 꽉 채우기 */
+}
+
+.modal-right {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20px;
+    margin: 20px;
+    /* 가로 세로 여백 20px */
+}
+
+.modal-title {
+    font-size: 32px;
+    /* 제목 크기를 키움 */
+    margin-bottom: 10px;
+}
+
+.modal-price {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.modal-price .original-price {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.modal-price .discount-price {
+    color: #e53935;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal-description {
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* 모달창 name 아래 수평 줄 스타일 */
+.custom-divider {
+    border: none;
+    /* 기본 테두리 제거 */
+    border-top: 2px solid #08f;
+    /* 선의 두께와 색상 설정 */
+    margin: 10px 0;
+    /* 위아래 여백 설정 */
+    width: 100%;
+    /* 가로폭 100%로 지정 */
+    box-sizing: border-box;
+    /* 여백 포함한 크기 계산 */
+}
+
+/* 마우스 갖다대면 생기는 효과과 */
+.product-card {
+    width: 400px;
+    height: 400px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    cursor: pointer;
+}
+
+.product-card::before,
+.product-card::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    background: transparent;
+    transition: width 0.5s, height 0.5s;
+}
+
+.product-card::before {
+    top: 0;
+    left: 0;
+    border-top: 4px solid #08f;
+    border-left: 4px solid #08f;
+}
+
+.product-card::after {
+    bottom: 0;
+    right: 0;
+    border-bottom: 4px solid #08f;
+    border-right: 4px solid #08f;
+}
+
+.product-card:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.product-card:hover::after {
+    width: 100%;
+    height: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
