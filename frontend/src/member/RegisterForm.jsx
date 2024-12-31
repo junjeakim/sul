@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./../style/Join.css";
 import axios from "axios";
-import Header from "./../components/header"; // Header 컴포넌트 추가
-import Footer from "./../components/footer"; // Footer 컴포넌트 추가
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -30,6 +28,10 @@ function RegisterForm() {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
+    if (!idCheck) {
+      alert("아이디 중복 확인을 해주세요.");
+      return;
+    }
     try {
       const response = await axios.post("/api/member/join", formData);
       if (response.data.success) {
@@ -46,11 +48,6 @@ function RegisterForm() {
 
   const checkIdDuplicate = async () => {
     try {
-      /*
-      const response = await axios.post("/api/member/checkId", {
-        mId: formData.mId,
-      });
-      */
       const response = await axios.post("http://localhost/api/member/checkId", {
         mId: formData.mId,
       });
@@ -58,6 +55,7 @@ function RegisterForm() {
         setIdCheck(true);
         alert("사용 가능한 아이디입니다.");
       } else {
+        setIdCheck(false);
         alert("이미 사용 중인 아이디입니다.");
       }
     } catch (error) {
@@ -72,14 +70,10 @@ function RegisterForm() {
       "성인인증",
       "width=600,height=400,scrollbars=no,resizable=no"
     );
-    //alert("인증되었습니다");
   };
 
   return (
     <div className="join_area">
-      {/* Header 컴포넌트 추가 */}
-      <Header />
-
       <form onSubmit={handleSubmit}>
         <h1>회원가입</h1>
         <h2>
@@ -186,12 +180,12 @@ function RegisterForm() {
                 />
               </td>
               <button
-                    type="button"
-                    className="textbtn"
-                    onClick={adultVerification}
-                  >
-                    성인인증
-                  </button>
+                type="button"
+                className="textbtn"
+                onClick={adultVerification}
+              >
+                성인인증
+              </button>
             </tr>
             <tr>
               <td className="title">주소</td>
@@ -203,7 +197,7 @@ function RegisterForm() {
                   size="50"
                   placeholder="주소를 입력하세요"
                   onChange={handleChange}
-               />
+                />
               </td>
             </tr>
           </tbody>
@@ -217,9 +211,6 @@ function RegisterForm() {
           </button>
         </div>
       </form>
-
-      {/* Footer 컴포넌트 추가 */}
-      <Footer />
     </div>
   );
 }

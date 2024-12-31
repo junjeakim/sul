@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/LoginPage.css";
-import Header from "../components/header";
-import Footer from "./../components/footer"; // Footer 컴포넌트 추가
+
 import idImage from "./../images/ID이미지.jpg"; // 이미지 import
 import pwImage from "./../images/pwimg.jpg"; // 이미지 import
 
@@ -85,9 +84,6 @@ const LoginPage = () => {
           </div>
         </form>
       </div>
-
-      {/* Footer 컴포넌트 추가 */}
-      <Footer />
     </div>
   );
 };

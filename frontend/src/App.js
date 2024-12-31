@@ -32,15 +32,12 @@ function App() {
         <Route path="/noticepage" element={<NoticePage />} />
         <Route path="/inquirypage" element={<InquiryPage />} />
         <Route path="/adminpage" element={<AdminPage />} />
-        <Route path="/whisky" element={<WhiskyPage />} />{" "}
-        {/* Whisky 페이지 라우트 */}
-        <Route path="/wine" element={<WinePage />} /> {/* Wine 페이지 라우트 */}
-        <Route path="/vodca" element={<VodcaPage />} />{" "}
-        {/* Vodca 페이지 라우트 */}
-        <Route path="/traditional" element={<TraditionalPage />} />{" "}
-        {/* Traditional 페이지 라우트 */}
+        <Route path="/whisky" element={<WhiskyPage />} />
+        <Route path="/wine" element={<WinePage />} />
+        <Route path="/vodca" element={<VodcaPage />} />
+        <Route path="/traditional" element={<TraditionalPage />} />
       </Routes>
-      <Footer />
+      <Footer /> {/* 전역 Footer 컴포넌트 */}
     </div>
   );
 }
