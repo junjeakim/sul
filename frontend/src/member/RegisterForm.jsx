@@ -16,6 +16,7 @@ function RegisterForm() {
   });
 
   const [idCheck, setIdCheck] = useState(false); // ID 중복 확인 여부
+  const [customEmail, setCustomEmail] = useState(false); // 직접 입력 옵션 여부
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -70,6 +71,20 @@ function RegisterForm() {
       "성인인증",
       "width=600,height=400,scrollbars=no,resizable=no"
     );
+  };
+
+  const toggleCustomEmail = (e) => {
+    const isCustom = e.target.value === "custom";
+    setCustomEmail(isCustom);
+    if (!isCustom) {
+      setFormData({ ...formData, mEmail2: e.target.value });
+    } else {
+      setFormData({ ...formData, mEmail2: "" });
+    }
+  };
+
+  const handleEmailCustomChange = (e) => {
+    setFormData({ ...formData, mEmail2: e.target.value });
   };
 
   return (
@@ -152,13 +167,25 @@ function RegisterForm() {
                     onChange={handleChange}
                     required
                   />
-                  <i>@</i>
-                  <select name="mEmail2" onChange={handleChange}>
-                    <option value="">선택</option>
-                    <option value="naver.com">naver.com</option>
-                    <option value="gmail.com">gmail.com</option>
-                    <option value="hanmail.net">hanmail.net</option>
-                  </select>
+                  <i>@&nbsp;</i>
+                  {!customEmail ? (
+                    <select name="mEmail2" onChange={toggleCustomEmail}>
+                      <option value="">선택</option>
+                      <option value="naver.com">naver.com</option>
+                      <option value="gmail.com">gmail.com</option>
+                      <option value="hanmail.net">hanmail.net</option>
+                      <option value="custom">직접입력</option>
+                    </select>
+                  ) : (
+                    <input
+                      className="direct-input"
+                      type="text"
+                      name="mEmail2"
+                      placeholder="도메인을 입력하세요"
+                      onChange={handleEmailCustomChange}
+                      required
+                    />
+                  )}
                 </div>
               </td>
             </tr>
@@ -171,21 +198,23 @@ function RegisterForm() {
             <tr>
               <td className="title">휴대전화</td>
               <td>
-                <input
-                  type="text"
-                  name="mPhone"
-                  placeholder="010-1234-5678"
-                  onChange={handleChange}
-                  required
-                />
+                <div className="adult-verification">
+                  <input
+                    type="text"
+                    name="mPhone"
+                    placeholder="010-1234-5678"
+                    onChange={handleChange}
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="textbtn"
+                    onClick={adultVerification}
+                  >
+                    성인인증
+                  </button>
+                </div>
               </td>
-              <button
-                type="button"
-                className="textbtn"
-                onClick={adultVerification}
-              >
-                성인인증
-              </button>
             </tr>
             <tr>
               <td className="title">주소</td>
@@ -205,7 +234,7 @@ function RegisterForm() {
         <div id="btn">
           <button className="btnArea" type="submit">
             확인
-          </button>
+          </button>&nbsp;&nbsp;
           <button className="btnArea" type="reset">
             취소
           </button>
