@@ -96,6 +96,10 @@ const NoticePage = () => {
           </div>
         </div>
       )}
+
+      {/* 연락처 정보와 저작권 세부 사항 */}
+      <div className="footer">
+      </div>
     </div>
   );
 };

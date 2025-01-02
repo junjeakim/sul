@@ -12,7 +12,7 @@ const Header = ({ userId, onMenuClick }) => {
       <div id="h_top" className="dFlex">
         <div id="searchArea">
           <input type="text" id="searchKey" name="search" />
-          <button>검색</button>
+          &nbsp;<button id="searchButton">검색</button>
         </div>
         <Link to="/" onClick={() => onMenuClick("main")}>
           <img alt="Logo" src={Logo} />
@@ -31,7 +31,7 @@ const Header = ({ userId, onMenuClick }) => {
           ) : (
             <>
               <Link to="/SignUpPage">
-                <button id="memRegBtn">회원가입</button>
+                <button id="memRegBtn">회원가입</button>&nbsp;
               </Link>
               <Link to="/LoginPage">
                 <button id="loginBtn">로그인</button>

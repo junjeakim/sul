@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./style/style.css"; // CSS 파일 경로
+import Box from "@mui/joy/Box";
+import Typography from "@mui/joy/Typography";
 
 const MainPage = () => {
   const [modalContent, setModalContent] = useState(null); // 모달 내용 상태
@@ -117,7 +119,22 @@ const MainPage = () => {
 
   return (
     <div id="wrap">
-      <main id="main">{renderContent()}</main>
+      <Box
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      >
+        <Typography
+          level="h6"
+          sx={{
+            textTransform: "uppercase",
+            mb: 2,
+            fontSize: "1.5rem",
+            textAlign: "center",
+          }}
+        >
+          
+        </Typography>
+        {renderContent()}
+      </Box>
     </div>
   );
 };

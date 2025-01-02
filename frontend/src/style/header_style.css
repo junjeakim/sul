@@ -136,3 +136,8 @@ li {
 		width: 400px;
 	}
 }
+
+.input-height-match {
+	height: 40px;
+	/* 필요한 높이 값으로 수정 */
+}

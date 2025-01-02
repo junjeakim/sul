@@ -37,9 +37,18 @@ div#slideshow>img:first-child {
    display: block;
 }
 
-div#itemListArea {
+#mainImgSlideArea {
    width: 100%;
    margin: 0 auto;
+   display: flex;
+   justify-content: center;
+}
+
+#itemListArea {
+   width: 100%;
+   margin: 0 auto;
+   display: flex;
+   flex-wrap: wrap;
    justify-content: center;
 }
 

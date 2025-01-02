@@ -9,6 +9,12 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-height: 75vh;
+    /* 전체 페이지 높이 조정 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* 상하 여백 조정 */
 }
 
 /* 페이지 제목 스타일 정의 */
@@ -174,4 +180,13 @@ h1 {
     font-size: 1rem;
     text-align: center;
     width: 100%;
+}
+
+/* 연락처 정보와 저작권 세부 사항 스타일 정의 */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f5f5f5;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
 }

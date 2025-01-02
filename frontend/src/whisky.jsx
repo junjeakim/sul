@@ -14,6 +14,17 @@ const WhiskyPage = () => {
 
   const products = [
     {
+      name: "임페리얼 12년 (500ml)",
+      price: "69,000원",
+      originalPrice: "85,000원",
+      image: "./images/whisky/Imperial12.png",
+      description: [
+        "임페리얼 12년은 최상급 원액만을 사용하여<br> 엄선된 블렌딩을 통해 부드러운 맛과 향을 자랑합니다.<br>",
+        "숙성된 풍부한 바닐라향과 과일맛이 조화롭게 어우러져<br> 누구나 부담 없이 즐길 수 있는 스카치 위스키입니다.<br>",
+        "독특한 리필 방지 기능으로 신뢰할 수 있는 품질을 보장합니다.",
+      ].join(""),
+    },
+    {
       name: "임페리얼 17년 (500ml)",
       price: "120,000원",
       originalPrice: "180,000원",
@@ -102,6 +113,17 @@ const WhiskyPage = () => {
         "더 큰 사이즈로 집에서 두고두고 마시기 좋다",
       ].join(""),
     },
+    {
+      name: "패스포트 위스키 (700ml)",
+      price: "31,000원",
+      originalPrice: "40,000원",
+      image: "./images/whisky/passport700.png",
+      description: [
+        "패스포트 위스키는 독창적인 블렌딩과 향으로 유명하며,<br> 긴 숙성기간을 통해 깊고 풍부한 맛을 자랑합니다.<br><br>",
+        "캠핑이나 파티에서 친구들과 함께 즐기기 좋은 사이즈로,<br> 한 번 열면 모두가 즐거워지는 훌륭한 선택입니다.<br><br>",
+        "700ml의 충분한 용량은 오랜 시간 동안 맛과 향을 유지하며,<br> 소중한 순간들을 특별하게 만들어줍니다.",
+      ].join(""),
+    },
   ];
 
   return (
@@ -115,7 +137,7 @@ const WhiskyPage = () => {
         <h1>- 임페리얼 -</h1>
       </div>
       <div className="product-list">
-        {products.slice(0, 3).map((product, index) => (
+        {products.slice(0, 4).map((product, index) => (
           <div
             key={index}
             className="product-card"
@@ -137,7 +159,7 @@ const WhiskyPage = () => {
         <h1>- 패스포트 -</h1>
       </div>
       <div className="product-list">
-        {products.slice(3).map((product, index) => (
+        {products.slice(4).map((product, index) => (
           <div
             key={index}
             className="product-card"
