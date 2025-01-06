@@ -118,23 +118,27 @@ const MainPage = () => {
   };
 
   return (
-    <div id="wrap">
-      <Box
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-      >
-        <Typography
-          level="h6"
+    <div className="wrap">
+      <div id="wrap">
+        <Box
           sx={{
-            textTransform: "uppercase",
-            mb: 2,
-            fontSize: "1.5rem",
-            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          
-        </Typography>
-        {renderContent()}
-      </Box>
+          <Typography
+            level="h6"
+            sx={{
+              textTransform: "uppercase",
+              mb: 2,
+              fontSize: "1.5rem",
+              textAlign: "center",
+            }}
+          ></Typography>
+          {renderContent()}
+        </Box>
+      </div>
     </div>
   );
 };

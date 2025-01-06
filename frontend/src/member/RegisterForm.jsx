@@ -98,6 +98,7 @@ function RegisterForm() {
         <table className="sample-table">
           <tbody>
             <tr>
+              <br />
               <td className="title">이름</td>
               <td>
                 <input
@@ -110,6 +111,7 @@ function RegisterForm() {
               </td>
             </tr>
             <tr>
+              <br />
               <td className="title">아이디</td>
               <td>
                 <div className="input-container">
@@ -133,6 +135,7 @@ function RegisterForm() {
               </td>
             </tr>
             <tr>
+              <br />
               <td className="title">비밀번호</td>
               <td>
                 <input
@@ -145,6 +148,7 @@ function RegisterForm() {
               </td>
             </tr>
             <tr>
+              <br />
               <td className="title">비밀번호 확인</td>
               <td>
                 <input
@@ -157,6 +161,7 @@ function RegisterForm() {
               </td>
             </tr>
             <tr>
+              <br />
               <td className="title">이메일</td>
               <td>
                 <div className="email-container">
@@ -190,12 +195,14 @@ function RegisterForm() {
               </td>
             </tr>
             <tr>
+              <br />
               <td className="title">생년월일</td>
               <td>
                 <input type="date" name="mBirthday" onChange={handleChange} />
               </td>
             </tr>
             <tr>
+              <br />
               <td className="title">휴대전화</td>
               <td>
                 <div className="adult-verification">
@@ -217,6 +224,7 @@ function RegisterForm() {
               </td>
             </tr>
             <tr>
+              <br />
               <td className="title">주소</td>
               <td>
                 <input

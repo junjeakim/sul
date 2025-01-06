@@ -3,10 +3,13 @@
 #wrap {
    margin: 0 auto;
    text-align: center;
+      padding-left: 300px;
+         padding-right: 300px;
+         /* 페이지 좌우 여백 추가 */
 }
 
 #Login_wrap {
-   width: 80%;
+   width: 100%;
    margin: 0 auto;
    padding: 20px;
    background-color: #f8f8f8;

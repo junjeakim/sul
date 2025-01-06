@@ -26,6 +26,17 @@ const WinePage = () => {
       ].join(""),
     },
     {
+      name: "무똥 까데 헤리티지 (750ml)",
+      price: "36,000원",
+      originalPrice: "45,000원",
+      image: "./images/wine/moutoncadet_heretigi.png",
+      description: [
+        "무똥 까데 헤리티지는 고급스러운 맛과 향을<br>",
+        "자랑하는 와인으로, 레드 베리와 스파이스 향이<br>",
+        "어우러져 깊은 맛을 제공합니다.",
+      ].join(""),
+    },
+    {
       name: "무똥 까데 소비뇽 블랑 (750ml)",
       price: "24,500원",
       originalPrice: "30,000원",
@@ -37,14 +48,15 @@ const WinePage = () => {
       ].join(""),
     },
     {
-      name: "무똥 까데 헤리티지 (750ml)",
-      price: "36,000원",
-      originalPrice: "45,000원",
-      image: "./images/wine/moutoncadet_heretigi.png",
+      name: "무똥 까데 리저브 쏘테른 (375ml)",
+      price: "76,000원",
+      originalPrice: "90,000원",
+      image: "./images/wine/moutoncadet_sauternes.png",
       description: [
-        "무똥 까데 헤리티지는 고급스러운 맛과 향을<br>",
-        "자랑하는 와인으로, 레드 베리와 스파이스 향이<br>",
-        "어우러져 깊은 맛을 제공합니다.",
+        "무똥 까데 리저브 쏘테른은 달콤하고<br>",
+        "우아한 맛을 자랑하는 디저트 와인입니다.<br>",
+        "벌꿀과 말린 과일의 풍부한 향이 입안을 감싸며,<br>",
+        "섬세하고 균형 잡힌 맛을 제공합니다.",
       ].join(""),
     },
     {
@@ -70,7 +82,7 @@ const WinePage = () => {
       ].join(""),
     },
     {
-      name: "샤도네이 (750ml)",
+      name: "로스 바스코스 샤도네이 (750ml)",
       price: "21,000원",
       originalPrice: "25,000원",
       image: "./images/wine/los_vascos_thato.png",
@@ -78,6 +90,18 @@ const WinePage = () => {
         "로스 바스코스 샤도네이는<br>",
         "신선하고 상쾌한 맛과 함께<br>",
         "부드러운 텍스처를 자랑하는 화이트 와인입니다.",
+      ].join(""),
+    },
+    {
+      name: "로스 바스코스 로제 (750ml)",
+      price: "21,000원",
+      originalPrice: "25,000원",
+      image: "./images/wine/los_vascos_rose.png",
+      description: [
+        "로스 바스코스 로제는 프레시하고<br>",
+        "과일의 향이 가득한 로제 와인입니다.<br>",
+        "붉은 베리와 시트러스 향이 조화를 이루며,<br>",
+        "부드럽고 상쾌한 마무리를 자랑합니다.",
       ].join(""),
     },
   ];
@@ -93,7 +117,7 @@ const WinePage = () => {
         <h1>- 무똥까데 -</h1>
       </div>
       <div className="product-list">
-        {products.slice(0, 3).map((product, index) => (
+        {products.slice(0, 4).map((product, index) => (
           <div
             key={index}
             className="product-card"
@@ -115,7 +139,7 @@ const WinePage = () => {
         <h1>- 로스 바스코스 -</h1>
       </div>
       <div className="product-list">
-        {products.slice(3).map((product, index) => (
+        {products.slice(4).map((product, index) => (
           <div
             key={index}
             className="product-card"
@@ -160,6 +184,10 @@ const WinePage = () => {
                 className="modal-description"
                 dangerouslySetInnerHTML={{ __html: modalContent.description }}
               />
+              <div className="modal-buttons">
+                <button className="modal-button">관심상품 등록</button>
+                <button className="modal-button">장바구니 추가</button>
+              </div>
             </div>
           </div>
         </div>

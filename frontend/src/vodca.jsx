@@ -35,10 +35,6 @@ const VodcaPage = () => {
         "자체 생산 겨울 밀 을 사용합니다. 1리터 병을 채우는 데 1킬로그램 이상의<br>",
         "곡물이 사용됩니다. 엡솔루트 보드카는 유리병은 크고 오래된 약국 병처럼<br>",
         "생겼으며 모든 사람에게 다양한 취향을 제공할 수 있습니다.<br><br>",
-        "엡솔루트 보드카는 상업용이든 주거용 이든 대부분의 바와 레스토랑에는<br>",
-        "일반적으로 세계적으로 유명한 브랜드가 있습니다.<br>",
-        "이 보드카는 또한 칵테일 만들기 실험을 즐기는 사람들을 위한<br>",
-        "홈 바에 완벽하게 추가됩니다.",
       ].join(""),
     },
     {
@@ -195,6 +191,10 @@ const VodcaPage = () => {
                 className="modal-description"
                 dangerouslySetInnerHTML={{ __html: modalContent.description }}
               />
+              <div className="modal-buttons">
+                <button className="modal-button">관심상품 등록</button>
+                <button className="modal-button">장바구니 추가</button>
+              </div>
             </div>
           </div>
         </div>

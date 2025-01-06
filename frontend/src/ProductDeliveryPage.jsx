@@ -47,6 +47,7 @@ const ProductDeliveryPage = () => {
   ];
 
   return (
+    <div className="wrap">
     <div className="delivery-container">
       <h1>이용안내</h1>
       <div className="accordion">
@@ -73,6 +74,7 @@ const ProductDeliveryPage = () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

@@ -61,6 +61,7 @@ const InquiryPage = () => {
   };
 
   return (
+    <div className="wrap">
     <div className="board-page">
       <h1>문의사항</h1>
       <table className="post-table">
@@ -166,6 +167,7 @@ const InquiryPage = () => {
           글쓰기
         </button>
       )}
+    </div>
     </div>
   );
 };

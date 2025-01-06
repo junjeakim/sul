@@ -1,6 +1,12 @@
+div.wrap {
+    padding-left: 300px;
+    padding-right: 300px;
+    /* 페이지 좌우 여백 추가 */
+}
+
 /* 게시판 페이지의 전체 레이아웃을 정의 */
 .board-page {
-    width: 100%;
+    width: 800px;
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
@@ -9,6 +15,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
 }
 
 /* 페이지 제목 스타일 정의 */

@@ -57,6 +57,7 @@ const NoticePage = () => {
   ];
 
   return (
+     <div className="wrap">
     <div className="board-page">
       <h1>공지사항</h1>
       <table className="post-table">
@@ -100,6 +101,7 @@ const NoticePage = () => {
       {/* 연락처 정보와 저작권 세부 사항 */}
       <div className="footer">
       </div>
+    </div>
     </div>
   );
 };

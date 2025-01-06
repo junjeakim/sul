@@ -8,6 +8,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StarIcon from "@mui/icons-material/Star";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
+import StoreIcon from "@mui/icons-material/Store"; // 매장 아이콘 추가
 
 const ConvenienceFeatures = () => {
   const navigate = useNavigate();
@@ -93,6 +94,28 @@ const ConvenienceFeatures = () => {
           >
             <ShoppingCartIcon sx={{ mr: 1 }} /> {/* 아이콘 추가 */}
             이용안내
+          </ListItemButton>
+          <ListItemButton
+            onClick={() => navigate("/pickup-store")}
+            sx={{
+              fontSize: "1.2rem",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "flex",
+              alignItems: "center",
+              border: "1px solid transparent",
+              borderRadius: "8px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+              transition: "transform 0.3s, box-shadow 0.3s",
+              ":hover": {
+                transform: "translateY(-10px)",
+                boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+              },
+            }}
+          >
+            <StoreIcon sx={{ mr: 1 }} /> {/* 아이콘 추가 */}
+            픽업 매장 선택
           </ListItemButton>
           <ListItemButton
             sx={{

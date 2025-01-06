@@ -1,7 +1,12 @@
+div.wrap {
+    padding-left: 300px;
+    padding-right: 300px;
+    /* 페이지 좌우 여백 추가 */
+}
+
 /* 게시판 페이지의 전체 레이아웃을 정의 */
 .board-page {
-    width: 100%;
-    max-width: 800px;
+    width: 800px;
     margin: 0 auto;
     text-align: center;
     font-family: Arial, sans-serif;

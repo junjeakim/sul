@@ -57,6 +57,7 @@ const BoardPage = () => {
   };
 
   return (
+    <div className="wrap">
     <div className="board-page">
       <h1>자유게시판</h1>
       <table className="post-table">
@@ -141,6 +142,7 @@ const BoardPage = () => {
           글쓰기
         </button>
       )}
+    </div>
     </div>
   );
 };

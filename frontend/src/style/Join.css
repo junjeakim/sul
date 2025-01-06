@@ -2,6 +2,12 @@
 
 @import url(style_Reset.css);
 
+.join_area {
+   padding-left: 300px;
+   padding-right: 300px;
+      /* 페이지 좌우 여백 추가 */
+}
+
 .join_area form {
    width: 800px;
    /* 폼 너비 늘림 */
@@ -25,18 +31,21 @@
 }
 
 .join_area .sample-table {
-   width: 90%;
+   width: 100%;
    /* 테이블 너비 늘림 */
    border-collapse: collapse;
-   margin-left: 5%;
+   margin-left: 0;
    /* 중앙 정렬 */
 }
 
 .join_area .sample-table tr>td.title {
-   width: 25%;
+   width: 20%;
    /* 가로폭 조정 */
    font-weight: bold;
    text-indent: 20px;
+   white-space: nowrap;
+   vertical-align: middle;
+   /* 텍스트 수직 중앙 정렬 */
 }
 
 .join_area input[type='text'],
@@ -44,7 +53,7 @@
 .join_area input[type='date'],
 .join_area input[type='tel'],
 .join_area select {
-   width: calc(100% - 150px);
+   width: calc(100% - 140px);
    /* 100%에서 버튼 크기와 여백을 뺀 값 */
    padding: 10px;
    margin: 10px 0;
@@ -87,7 +96,7 @@
    display: flex;
    align-items: center;
    gap: 20px;
-   width: 454px;
+   width: calc(100% - 140px);
 }
 
 .join_area .textArea {
@@ -97,11 +106,12 @@
    border: 1px solid #ccc;
    border-radius: 4px;
    box-sizing: border-box;
+   vertical-align: middle;
 }
 
 .join_area .textbtn {
-   padding: 10px;
-   height: 50px;
+   padding: 10px 15px;
+   height: 40px;
    /* 버튼 높이 설정 */
    background-color: #8B0000;
    color: #fff;
@@ -109,6 +119,9 @@
    border-radius: 4px;
    cursor: pointer;
    box-sizing: border-box;
+   font-size: 15px;
+   width: 100px;
+   vertical-align: middle;
 }
 
 .join_area .textbtn:hover {

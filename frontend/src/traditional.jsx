@@ -114,6 +114,10 @@ const TraditionalPage = () => {
                 className="modal-description"
                 dangerouslySetInnerHTML={{ __html: modalContent.description }}
               />
+              <div className="modal-buttons">
+                <button className="modal-button">관심상품 등록</button>
+                <button className="modal-button">장바구니 추가</button>
+              </div>
             </div>
           </div>
         </div>
