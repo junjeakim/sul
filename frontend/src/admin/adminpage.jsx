@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Header from "../components/header.jsx"; // Header 컴포넌트 경로
-import Footer from "../components/footer.jsx"; // Footer 컴포넌트 경로
 import WhiskyPage from "../whisky.jsx"; // WhiskyPage 컴포넌트 경로
 import WinePage from "../wine.jsx"; // WinePage 컴포넌트 경로
 import VodcaPage from "../vodca.jsx"; // VodcaPage 컴포넌트 경로
@@ -11,7 +9,7 @@ import NoticePage from "../noticepage.jsx"; // NoticePage 컴포넌트 경로
 import "../style/style.css"; // CSS 파일 경로
 
 const AdminPage = () => {
-  const [currentPage, setCurrentPageState] = useState("main"); // 현재 페이지 상태
+  const [currentPage] = useState("main"); // 현재 페이지 상태
   const [modalContent, setModalContent] = useState(null); // 모달 내용 상태
   const uId_Session = sessionStorage.getItem("userId"); // 세션에서 userId 가져오기
 
@@ -156,9 +154,7 @@ const AdminPage = () => {
 
   return (
     <div id="wrap">
-      <Header userId={uId_Session} onMenuClick={setCurrentPageState} />
       <main id="main">{renderContent()}</main>
-      <Footer />
     </div>
   );
 };

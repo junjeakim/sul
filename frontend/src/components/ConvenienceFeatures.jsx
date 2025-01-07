@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/joy/Box";
 import List from "@mui/joy/List";
 import ListItemButton from "@mui/joy/ListItemButton";
@@ -9,158 +9,59 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import StarIcon from "@mui/icons-material/Star";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import StoreIcon from "@mui/icons-material/Store"; // 매장 아이콘 추가
+import "../style/convenience_features_style.css"; // 스타일 경로
 
 const ConvenienceFeatures = () => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const element = document.querySelector(".convenience-features");
+      const scrollLeft =
+        window.pageXOffset || document.documentElement.scrollLeft;
+      element.style.transform = `translateX(-${scrollLeft}px)`;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <Box sx={{ display: "flex" }}>
-      <Box
-        sx={{
-          width: "calc(66% - 20px)", // 가로 길이를 3분의 2로 조정
-          maxWidth: 267,
-          pl: "20px",
-          pr: "20px",
-          pt: "10px",
-          pb: "20px",
-          position: "fixed",
-          left: "20px", // 왼쪽에서 20px 떨어지게 조정
-          top: "150px",
-          overflowY: "auto", // 스크롤 추가
-          backgroundColor: "white",
-          borderRadius: "8px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <Typography
-          level="h6"
-          sx={{
-            textTransform: "uppercase",
-            mb: 2,
-            fontSize: "1.5rem",
-            textAlign: "left",
-          }}
+    <Box className="convenience-features">
+      <Typography level="h6" className="convenience-title">
+        편의기능
+      </Typography>
+      <List className="convenience-list">
+        <ListItemButton
+          onClick={() => navigate("/map")}
+          className="feature-item"
         >
-          편의기능
-        </Typography>
-        <List
-          size="sm"
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px", // 항목 간격 추가
-          }}
+          <LocationOnIcon className="feature-icon" />
+          오시는길
+        </ListItemButton>
+        <ListItemButton
+          onClick={() => navigate("/product-delivery")}
+          className="feature-item"
         >
-          <ListItemButton
-            onClick={() => navigate("/map")}
-            sx={{
-              fontSize: "1.2rem", // 글자 크기 조정
-              whiteSpace: "nowrap", // 텍스트 줄바꿈 방지
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "flex",
-              alignItems: "center",
-              border: "1px solid transparent",
-              borderRadius: "8px",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              transition: "transform 0.3s, box-shadow 0.3s",
-              ":hover": {
-                transform: "translateY(-10px)",
-                boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-              },
-            }}
-          >
-            <LocationOnIcon sx={{ mr: 1 }} /> {/* 아이콘 추가 */}
-            오시는길
-          </ListItemButton>
-          <ListItemButton
-            onClick={() => navigate("/product-delivery")}
-            sx={{
-              fontSize: "1.2rem", // 글자 크기 조정
-              whiteSpace: "nowrap", // 텍스트 줄바꿈 방지
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "flex",
-              alignItems: "center",
-              border: "1px solid transparent",
-              borderRadius: "8px",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              transition: "transform 0.3s, box-shadow 0.3s",
-              ":hover": {
-                transform: "translateY(-10px)",
-                boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-              },
-            }}
-          >
-            <ShoppingCartIcon sx={{ mr: 1 }} /> {/* 아이콘 추가 */}
-            이용안내
-          </ListItemButton>
-          <ListItemButton
-            onClick={() => navigate("/pickup-store")}
-            sx={{
-              fontSize: "1.2rem",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "flex",
-              alignItems: "center",
-              border: "1px solid transparent",
-              borderRadius: "8px",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              transition: "transform 0.3s, box-shadow 0.3s",
-              ":hover": {
-                transform: "translateY(-10px)",
-                boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-              },
-            }}
-          >
-            <StoreIcon sx={{ mr: 1 }} /> {/* 아이콘 추가 */}
-            픽업 매장 선택
-          </ListItemButton>
-          <ListItemButton
-            sx={{
-              fontSize: "1.2rem",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "flex",
-              alignItems: "center",
-              border: "1px solid transparent",
-              borderRadius: "8px",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              transition: "transform 0.3s, box-shadow 0.3s",
-              ":hover": {
-                transform: "translateY(-10px)",
-                boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-              },
-            }}
-          >
-            <StarIcon sx={{ mr: 1 }} /> {/* 아이콘 추가 */}
-            이달의 추천(AI)
-          </ListItemButton>
-          <ListItemButton
-            sx={{
-              fontSize: "1.2rem",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              display: "flex",
-              alignItems: "center",
-              border: "1px solid transparent",
-              borderRadius: "8px",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              transition: "transform 0.3s, box-shadow 0.3s",
-              ":hover": {
-                transform: "translateY(-10px)",
-                boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-              },
-            }}
-          >
-            <LocalMallIcon sx={{ mr: 1 }} /> {/* 아이콘 추가 */}
-            관심상품
-          </ListItemButton>
-        </List>
-      </Box>
+          <ShoppingCartIcon className="feature-icon" />
+          이용안내
+        </ListItemButton>
+        <ListItemButton
+          onClick={() => navigate("/pickup-store")}
+          className="feature-item"
+        >
+          <StoreIcon className="feature-icon" />
+          픽업 매장 선택
+        </ListItemButton>
+        <ListItemButton className="feature-item">
+          <StarIcon className="feature-icon" />
+          이달의 추천(AI)
+        </ListItemButton>
+        <ListItemButton className="feature-item">
+          <LocalMallIcon className="feature-icon" />
+          관심상품
+        </ListItemButton>
+      </List>
     </Box>
   );
 };

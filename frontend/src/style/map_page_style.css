@@ -1,3 +1,9 @@
+.wrap {
+    padding-left: 300px;
+    padding-right: 300px;
+    /* 페이지 좌우 여백 추가 */
+}
+
 .map-page-container {
     display: flex;
     justify-content: center;
@@ -8,15 +14,17 @@
 }
 
 .map {
-    width: 60%;
+    width: 800px;
+    /* 고정된 가로 크기 */
     height: 600px;
     /* 고정된 세로 크기 */
-    max-width: 800px;
 }
 
 .map-description-box {
-    width: 30%;
+    width: 400px;
+    /* 고정된 가로 크기 */
     height: 569px;
+    /* 고정된 세로 크기 */
     margin-left: 20px;
     /* 맵 이미지와 설명 박스 사이의 간격 조정 */
     padding: 20px;
@@ -33,7 +41,6 @@
 .map-text {
     margin: 5px 0;
     font-size: 24px;
-    text-align: left;
 }
 
 @media (max-width: 768px) {

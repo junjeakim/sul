@@ -1,22 +1,28 @@
 @charset "UTF-8";
-@import url('./style_Reset.css'); 
+@import url('./style_Reset.css');
 /* 상대 경로로 수정 */
 
 /* 푸터 스타일 */
-footer#footer{
+footer#footer {
 	width: 100%;
+	/* 전체 너비를 100%로 설정 */
+	max-width: 1920px;
+	/* 최대 너비 설정 */
 	height: 150px;
+	margin: 0 auto;
+	/* 가로 중앙 배치 */
 	padding: 20px 30px;
-	align-items :center;
+	align-items: center;
 	justify-content: space-between;
 	background-color: #aaa;
-}
-#footer>div#footerTxtArea{
-	font-size: 16px;
-	
+	box-sizing: border-box;
+	/* 패딩과 보더 포함한 전체 크기 계산 */
 }
 
-#footer>div#adminArea{
+#footer>div#footerTxtArea {
+	font-size: 16px;
+}
+
+#footer>div#adminArea {
 	border: 1px solid #000;
-	
 }
