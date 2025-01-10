@@ -51,7 +51,8 @@
    vertical-align: middle;
 }
 
-.login_con button {
+/* 기존 로그인 버튼 스타일 */
+.login-btn {
    width: 220px;
    height: 45px;
    margin-top: 20px;
@@ -64,8 +65,39 @@
    transition: background-color 0.3s;
 }
 
-.login_con button:hover {
+.login-btn:hover {
    background-color: #555;
+}
+
+/* 카카오 로그인 버튼 스타일 */
+.kakao-btn {
+   width: 220px;
+   height: 45px;
+   margin-top: 20px;
+   background-color: #fee500;
+   border: none;
+   border-radius: 5px;
+   font-size: 16px;
+   cursor: pointer;
+   transition: background-color 0.3s;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.kakao-btn img {
+   height: 180%;
+   /* 이미지 크기 조절 */
+   width: auto;
+   /* 비율 유지 */
+}
+
+.kakao-btn img:hover {
+   background-color: #ffeb3b;
+}
+
+.kakao-btn:hover {
+   background-color: #ffeb3b;
 }
 
 .login_bottom {

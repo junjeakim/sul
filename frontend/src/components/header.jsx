@@ -21,7 +21,7 @@ const Header = ({ userId, onMenuClick }) => {
             <div id="H_btnArea">
                {isLoggedIn ? (
                   <>
-                     <button id="cart" aria-label="장바구니">
+                     <button id="cart" aria-label="장바구니" onClick={() => navigate('/cart')}>
                         장바구니
                      </button>
                      <button id="myPageBtn">마이페이지</button>
