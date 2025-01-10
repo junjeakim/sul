@@ -20,38 +20,47 @@ import MapPage from "./MapPage.jsx"; // 오시는길 페이지 컴포넌트
 import ProductDeliveryPage from "./ProductDeliveryPage.jsx"; // 상품 받는법 페이지 컴포넌트
 import PickupStore from "./PickupStore.jsx"; // 픽업 매장 선택 페이지 컴포넌트
 import ConvenienceFeatures from "./components/ConvenienceFeatures.jsx"; // 편의기능 컴포넌트 경로
+import { AuthProvider } from "./script/AuthContext.js"; // AuthContext 경로
 
 function App() {
   return (
-    <div>
-      <Header />
-      <div style={{ display: "flex" }}>
-        <ConvenienceFeatures />
-        <div style={{ flex: 1 }}>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/SignUpPage" element={<RegisterForm />} />
-            <Route path="/AgreementPage" element={<AgreementPage />} />
-            <Route path="/CertificationPage" element={<CertificationPage />} />
-            <Route path="/LoginPage" element={<LoginPage />} />
-            <Route path="/ForgotPage" element={<ForgotPage />} />
-            <Route path="/boardpage" element={<BoardPage />} />
-            <Route path="/noticepage" element={<NoticePage />} />
-            <Route path="/inquirypage" element={<InquiryPage />} />
-            <Route path="/adminpage" element={<AdminPage />} />
-            <Route path="/whisky" element={<WhiskyPage />} />
-            <Route path="/wine" element={<WinePage />} />
-            <Route path="/vodca" element={<VodcaPage />} />
-            <Route path="/traditional" element={<TraditionalPage />} />
-            <Route path="/map" element={<MapPage />} />
-            <Route path="/product-delivery" element={<ProductDeliveryPage />} />
-            <Route path="/pickup-store" element={<PickupStore />} />{" "}
-            {/* 새로운 경로 추가 */}
-          </Routes>
+    <AuthProvider>
+      <div>
+        <Header />
+        <div style={{ display: "flex" }}>
+          <ConvenienceFeatures />
+          <div style={{ flex: 1 }}>
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/SignUpPage" element={<RegisterForm />} />
+              <Route path="/AgreementPage" element={<AgreementPage />} />
+              <Route
+                path="/CertificationPage"
+                element={<CertificationPage />}
+              />
+              <Route path="/LoginPage" element={<LoginPage />} />
+              <Route path="/ForgotPage" element={<ForgotPage />} />
+              <Route path="/boardpage" element={<BoardPage />} />
+              <Route path="/noticepage" element={<NoticePage />} />
+              <Route path="/inquirypage" element={<InquiryPage />} />
+              <Route path="/adminpage" element={<AdminPage />} />
+              <Route path="/whisky" element={<WhiskyPage />} />
+              <Route path="/wine" element={<WinePage />} />
+              <Route path="/vodca" element={<VodcaPage />} />
+              <Route path="/traditional" element={<TraditionalPage />} />
+              <Route path="/map" element={<MapPage />} />
+              <Route
+                path="/product-delivery"
+                element={<ProductDeliveryPage />}
+              />
+              <Route path="/pickup-store" element={<PickupStore />} />
+              {/* 새로운 경로 추가 */}
+            </Routes>
+          </div>
         </div>
+        <Footer /> {/* 전역 Footer 컴포넌트 */}
       </div>
-      <Footer /> {/* 전역 Footer 컴포넌트 */}
-    </div>
+    </AuthProvider>
   );
 }
 

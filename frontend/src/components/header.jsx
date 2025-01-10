@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../script/AuthContext";
 import "../style/header_style.css";
 import Logo from "../images/Logo-removebg.png";
 
 const Header = ({ userId, onMenuClick }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!userId);
+  const { isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
 
   return (
@@ -20,11 +21,20 @@ const Header = ({ userId, onMenuClick }) => {
         <div id="H_btnArea">
           {isLoggedIn ? (
             <>
-              <button id="cart" aria-label="장바구니">
+              <button
+                id="cart"
+                aria-label="장바구니"
+                onClick={() => navigate("/cart")}
+              >
                 장바구니
               </button>
               <button id="myPageBtn">마이페이지</button>
-              <button id="logoutBtn" onClick={() => setIsLoggedIn(false)}>
+              <button
+                id="logoutBtn"
+                onClick={() => {
+                  logout();
+                }}
+              >
                 로그아웃
               </button>
             </>

@@ -16,43 +16,25 @@ function RegisterForm() {
   });
 
   const [idCheck, setIdCheck] = useState(false); // ID 중복 확인 여부
-  const [customEmail, setCustomEmail] = useState(false); // 직접 입력 옵션 여부
+  const [customEmail, setCustomEmail] = useState(false); // 이메일 직접 입력 여부
 
+  // Handle input changes and update the form data state
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (formData.mPw !== formData.mPw2) {
-      alert("비밀번호가 일치하지 않습니다.");
-      return;
-    }
-    if (!idCheck) {
-      alert("아이디 중복 확인을 해주세요.");
-      return;
-    }
-    try {
-      const response = await axios.post("/api/member/join", formData);
-      if (response.data.success) {
-        alert("회원가입이 완료되었습니다!");
-        window.location.href = "/login"; // 로그인 페이지로 리디렉션
-      } else {
-        alert("회원가입 실패");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("서버 오류가 발생했습니다.");
-    }
-  };
-
+  // Check if the ID is already in use by calling the backend API
   const checkIdDuplicate = async () => {
     try {
-      const response = await axios.post("http://localhost/api/member/checkId", {
-        mId: formData.mId,
-      });
-      if (response.data.data) {
+      const token = localStorage.getItem("token"); // JWT 토큰 가져오기
+      const response = await axios.post(
+        "http://localhost:8081/api/member/checkId",
+        { mId: formData.mId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (response.data) {
         setIdCheck(true);
         alert("사용 가능한 아이디입니다.");
       } else {
@@ -60,19 +42,43 @@ function RegisterForm() {
         alert("이미 사용 중인 아이디입니다.");
       }
     } catch (error) {
-      console.error("ID 확인 에러: ", error);
+      console.error("ID 중복 확인 중 오류가 발생했습니다.", error);
       alert("ID 중복 확인 중 오류가 발생했습니다.");
     }
   };
 
-  const adultVerification = async () => {
-    window.open(
-      "/CertificationPage",
-      "성인인증",
-      "width=600,height=400,scrollbars=no,resizable=no"
-    );
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (formData.mPw !== formData.mPw2) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    if (!idCheck) {
+      alert("아이디 중복 확인을 해주세요.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8081/api/member/join",
+        formData
+      );
+      if (response.data) {
+        alert("회원가입이 완료되었습니다!");
+        window.location.href = "/login";
+      } else {
+        alert("회원가입 실패");
+      }
+    } catch (error) {
+      console.error("회원가입 중 오류 발생:", error);
+      alert("서버 오류가 발생했습니다.");
+    }
   };
 
+  // Toggle custom email input field
   const toggleCustomEmail = (e) => {
     const isCustom = e.target.value === "custom";
     setCustomEmail(isCustom);
@@ -83,8 +89,18 @@ function RegisterForm() {
     }
   };
 
+  // Handle custom email input changes
   const handleEmailCustomChange = (e) => {
     setFormData({ ...formData, mEmail2: e.target.value });
+  };
+
+  // Adult verification pop-up
+  const adultVerification = () => {
+    window.open(
+      "/CertificationPage",
+      "성인인증",
+      "width=600,height=400,scrollbars=no,resizable=no"
+    );
   };
 
   return (
@@ -94,11 +110,9 @@ function RegisterForm() {
         <h2>
           <span style={{ color: "#ff0000" }}>*</span>회원정보
         </h2>
-
         <table className="sample-table">
           <tbody>
             <tr>
-              <br />
               <td className="title">이름</td>
               <td>
                 <input
@@ -111,7 +125,6 @@ function RegisterForm() {
               </td>
             </tr>
             <tr>
-              <br />
               <td className="title">아이디</td>
               <td>
                 <div className="input-container">
@@ -135,7 +148,6 @@ function RegisterForm() {
               </td>
             </tr>
             <tr>
-              <br />
               <td className="title">비밀번호</td>
               <td>
                 <input
@@ -148,7 +160,6 @@ function RegisterForm() {
               </td>
             </tr>
             <tr>
-              <br />
               <td className="title">비밀번호 확인</td>
               <td>
                 <input
@@ -161,7 +172,6 @@ function RegisterForm() {
               </td>
             </tr>
             <tr>
-              <br />
               <td className="title">이메일</td>
               <td>
                 <div className="email-container">
@@ -195,14 +205,12 @@ function RegisterForm() {
               </td>
             </tr>
             <tr>
-              <br />
               <td className="title">생년월일</td>
               <td>
                 <input type="date" name="mBirthday" onChange={handleChange} />
               </td>
             </tr>
             <tr>
-              <br />
               <td className="title">휴대전화</td>
               <td>
                 <div className="adult-verification">
@@ -224,7 +232,6 @@ function RegisterForm() {
               </td>
             </tr>
             <tr>
-              <br />
               <td className="title">주소</td>
               <td>
                 <input
@@ -242,7 +249,8 @@ function RegisterForm() {
         <div id="btn">
           <button className="btnArea" type="submit">
             확인
-          </button>&nbsp;&nbsp;
+          </button>
+          &nbsp;&nbsp;
           <button className="btnArea" type="reset">
             취소
           </button>
