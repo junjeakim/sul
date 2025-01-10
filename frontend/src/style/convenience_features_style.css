@@ -1,0 +1,56 @@
+body {
+    position: relative;
+}
+
+.convenience-features {
+    position: fixed;
+    /* 세로 스크롤만 따라가도록 설정 */
+    top: 150px;
+    /* 화면 상단에서 150px 떨어진 위치 */
+    left: 20px;
+    /* 화면 왼쪽에서 20px 떨어진 위치 */
+    width: 267px;
+    padding: 10px 20px 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    /* 세로 스크롤 활성화 */
+    overflow-x: hidden;
+    /* 가로 스크롤 제거 */
+}
+
+.convenience-title {
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+.convenience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.feature-item {
+    font-size: 1.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.feature-icon {
+    margin-right: 8px;
+}

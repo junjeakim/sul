@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.delivery-container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-height: 75vh;
+    /* 전체 페이지 높이 조정 */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.accordion {
+    margin: 10px 0;
+}
+
+.accordion-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    background: #f7f7f7;
+    cursor: pointer;
+    padding: 15px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.accordion-header:hover {
+    background: #eaeaea;
+}
+
+.accordion-header.active {
+    background: #ddd;
+}
+
+.accordion-content {
+    padding: 15px;
+    background: #fff;
+    display: none;
+}
+
+.accordion-content p {
+    margin: 0 0 10px;
+}
