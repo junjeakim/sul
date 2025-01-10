@@ -1,7 +1,6 @@
 package com.back.kakao;
 
 import java.util.Map;
-
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
@@ -9,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/api/kakao")
-@CrossOrigin(origins = "http://localhost:3000") // CORS 설정
+@CrossOrigin(origins = "http://localhost:3000")
 public class KakaoLogin {
 
     @PostMapping("/login")
@@ -43,8 +42,10 @@ public class KakaoLogin {
 
             return ResponseEntity.ok(response.getBody()); // 사용자 정보 반환
         } catch (HttpClientErrorException e) {
+            System.err.println("카카오 API 호출 중 오류: " + e.getMessage());
             return ResponseEntity.status(e.getStatusCode()).body("카카오 API 호출 중 오류: " + e.getMessage());
         } catch (Exception e) {
+            System.err.println("서버 오류: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류: " + e.getMessage());
         }
     }
@@ -68,10 +69,10 @@ public class KakaoLogin {
             System.out.println("토큰 검증 성공: " + response.getBody());
             return response.getBody(); // 유효한 경우 JSON 문자열 반환
         } catch (HttpClientErrorException e) {
-            System.out.println("토큰 검증 실패: " + e.getMessage());
+            System.err.println("토큰 검증 실패: " + e.getMessage());
             return "Error: " + e.getResponseBodyAsString(); // 카카오에서 반환된 오류 메시지 포함
         } catch (Exception e) {
-            System.out.println("토큰 검증 실패: " + e.getMessage());
+            System.err.println("토큰 검증 실패: " + e.getMessage());
             return "Error: " + e.getMessage();
         }
     }

@@ -1,0 +1,108 @@
+2025-01-09T18:17:41.798+09:00 ERROR 13384 --- [backend] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'logging.level.com.back' to org.springframework.boot.logging.LogLevel:
+
+    Property: logging.level.com.back
+    Value: "member  # ì¬ê¸°ì ì¤ì  í¨í¤ì§ ì´ë¦ì ìë ¥"
+    Origin: class path resource [application.properties] - 25:24
+    Reason: failed to convert java.lang.String to org.springframework.boot.logging.LogLevel (caused by java.lang.IllegalArgumentException: No enum constant org.springframework.boot.logging.LogLevel.member  # ì¬ê¸°ì ì¤ì  í¨í¤ì§ ì´ë¦ì ìë ¥)
+
+Action:
+
+Update your application's configuration. The following values are valid:
+
+    DEBUG
+    ERROR
+    FATAL
+    INFO
+    OFF
+    TRACE
+    WARN
+
+2025-01-09T18:19:20.112+09:00 ERROR 8000 --- [backend] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'logging.level.com.back' to org.springframework.boot.logging.LogLevel:
+
+    Property: logging.level.com.back
+    Value: "DEBUG  # ì¬ê¸°ì ì¤ì  í¨í¤ì§ ì´ë¦ì ìë ¥"
+    Origin: class path resource [application.properties] - 25:24
+    Reason: failed to convert java.lang.String to org.springframework.boot.logging.LogLevel (caused by java.lang.IllegalArgumentException: No enum constant org.springframework.boot.logging.LogLevel.DEBUG  # ì¬ê¸°ì ì¤ì  í¨í¤ì§ ì´ë¦ì ìë ¥)
+
+Action:
+
+Update your application's configuration. The following values are valid:
+
+    DEBUG
+    ERROR
+    FATAL
+    INFO
+    OFF
+    TRACE
+    WARN
+
+2025-01-09T18:19:33.064+09:00 ERROR 11116 --- [backend] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'logging.level.com.back' to org.springframework.boot.logging.LogLevel:
+
+    Property: logging.level.com.back
+    Value: "DEBUG  # ì¬ê¸°ìì DEBUGë¡ ì¤ì "
+    Origin: class path resource [application.properties] - 25:24
+    Reason: failed to convert java.lang.String to org.springframework.boot.logging.LogLevel (caused by java.lang.IllegalArgumentException: No enum constant org.springframework.boot.logging.LogLevel.DEBUG  # ì¬ê¸°ìì DEBUGë¡ ì¤ì )
+
+Action:
+
+Update your application's configuration. The following values are valid:
+
+    DEBUG
+    ERROR
+    FATAL
+    INFO
+    OFF
+    TRACE
+    WARN
+
+2025-01-09T18:20:36.643+09:00 ERROR 1140 --- [backend] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'logging.level.com.back' to org.springframework.boot.logging.LogLevel:
+
+    Property: logging.level.com.back
+    Value: "DEBUG  # ì¬ê¸°ì ì¤ì  í¨í¤ì§ ì´ë¦ì ìë ¥"
+    Origin: class path resource [application.properties] - 25:24
+    Reason: failed to convert java.lang.String to org.springframework.boot.logging.LogLevel (caused by java.lang.IllegalArgumentException: No enum constant org.springframework.boot.logging.LogLevel.DEBUG  # ì¬ê¸°ì ì¤ì  í¨í¤ì§ ì´ë¦ì ìë ¥)
+
+Action:
+
+Update your application's configuration. The following values are valid:
+
+    DEBUG
+    ERROR
+    FATAL
+    INFO
+    OFF
+    TRACE
+    WARN
+

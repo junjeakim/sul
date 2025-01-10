@@ -1,28 +1,49 @@
 package com.back.Component;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.security.Key;
+import com.back.member.Member;
+
 import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
-    private final Key secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256); // HS256 방식으로 키 생성
-    private final long validityInMilliseconds = 3600000; // 토큰 유효 시간 1시간
 
-    public String createToken(String username) {
-        Date now = new Date();
-        Date validity = new Date(now.getTime() + validityInMilliseconds);
+    @Value("${jwt.secret-key}")
+    private String secretKey;
 
-        // JWT 토큰 생성
+    private static final long TOKEN_VALIDITY = 1000L * 60 * 60 * 24; // 1일
+
+    // JWT 토큰 생성
+    public String createToken(Member member) {
         return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(now)
-                .setExpiration(validity)
-                .signWith(secretKey) // 서명
+                .setSubject(member.getMId()) // 사용자 ID
+                .setIssuedAt(new Date()) // 발급 시간
+                .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY)) // 유효 기간
+                .signWith(SignatureAlgorithm.HS256, secretKey.getBytes()) // 서명
                 .compact();
+    }
+
+    // Claims 추출
+    public Claims getClaimsFromToken(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(secretKey.getBytes())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    // 토큰 유효성 검증
+    public boolean isValidToken(String token) {
+        try {
+            getClaimsFromToken(token); // Claims 추출 시 유효하면 true
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
