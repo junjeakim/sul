@@ -31,11 +31,11 @@ const ShoppingCart = () => {
             <table>
                <thead>
                   <tr>
-                     <th>삭제</th>
                      <th>사진</th>
                      <th>상품명</th>
                      <th>수량</th>
                      <th>상품금액</th>
+                     <th>삭제</th>
                   </tr>
                </thead>
                <tbody>
