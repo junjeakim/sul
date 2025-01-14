@@ -5,6 +5,7 @@ import '../style/LoginPage.css'
 import idImage from './../images/ID이미지.jpg'
 import pwImage from './../images/pwimg.jpg'
 import kakaoLoginImage from './../images/kakao_login_medium_narrow.png'
+import naverLoginImage from './../images/naver_login.png' // 네이버 로그인 이미지 추가
 
 const LoginPage = () => {
    const [formData, setFormData] = useState({ userId: '', password: '' })
@@ -33,6 +34,76 @@ const LoginPage = () => {
          loadKakaoSDK()
       }
    }, [])
+
+   // 네이버 로그인 함수 (팝업 창 열기)
+   // 네이버 로그인 함수 (팝업 창 열기)
+   const handleNaverLogin = () => {
+      const naverLoginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=S40I8qDoUEfjS3b8P4FU&redirect_uri=http://localhost:3000&state=STATE_STRING`
+      const width = 500
+      const height = 600
+      const left = window.screen.width / 2 - width / 2
+      const top = window.screen.height / 2 - height / 2
+      const newWindow = window.open(naverLoginUrl, 'NaverLogin', `width=${width},height=${height},top=${top},resizable=no,scrollbars=no`)
+
+      const checkPopupClosed = setInterval(() => {
+         try {
+            if (newWindow.closed) {
+               clearInterval(checkPopupClosed)
+               console.log('팝업 창이 닫혔습니다.')
+            }
+         } catch (error) {
+            console.error('팝업 창 체크 중 오류:', error)
+         }
+      }, 1000)
+   }
+
+   // 부모 창에서 메시지를 수신하고 팝업 닫기 처리
+   useEffect(() => {
+      const handleMessage = (event) => {
+         if (event.origin !== window.location.origin) return
+         const { code } = event.data
+         if (code) {
+            fetch(`http://localhost:8080/api/naver/token?code=${code}`, {
+               method: 'GET',
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+            })
+               .then((response) => response.json())
+               .then((data) => {
+                  const accessToken = data.accessToken
+                  if (accessToken) {
+                     fetch('http://localhost:8080/api/naver/login', {
+                        method: 'POST',
+                        headers: {
+                           'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ accessToken }),
+                     })
+                        .then((response) => response.json())
+                        .then((data) => {
+                           console.log('네이버 로그인 성공:', data)
+                           login() // AuthContext의 login 호출
+                           navigate('/') // 메인 페이지로 리디렉션
+                           window.location.reload() // 헤더 갱신
+                        })
+                        .catch((error) => {
+                           console.error('네이버 로그인 실패:', error)
+                        })
+                  }
+               })
+               .catch((error) => {
+                  console.error('액세스 토큰 요청 실패:', error)
+               })
+         }
+      }
+
+      window.addEventListener('message', handleMessage, false)
+
+      return () => {
+         window.removeEventListener('message', handleMessage, false)
+      }
+   }, [login, navigate])
 
    const handleSubmit = (e) => {
       e.preventDefault()
@@ -98,6 +169,9 @@ const LoginPage = () => {
                      </button>
                      <button type="button" className="kakao-btn" onClick={handleKakaoLogin}>
                         <img src={kakaoLoginImage} alt="카카오 로그인" />
+                     </button>
+                     <button type="button" className="naver-btn" onClick={handleNaverLogin}>
+                        <img src={naverLoginImage} alt="네이버 로그인" />
                      </button>
                      <div className="login_bottom clfix">
                         <p>

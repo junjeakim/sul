@@ -1,0 +1,127 @@
+/* 전체 페이지 스타일 */
+.my-page {
+   font-family: Arial, sans-serif; /* Arial 폰트 사용, sans-serif 대체 폰트 */
+   padding: 20px; /* 내부 여백 */
+   max-width: 1200px; /* 최대 너비 */
+   margin: 0 auto; /* 가운데 정렬 */
+   background-color: #f4f4f4; /* 배경 색상 */
+}
+
+/* 메인 콘텐츠 스타일 */
+.main-content {
+   display: flex; /* 플렉스박스 레이아웃 */
+   flex-direction: column; /* 세로 방향 정렬 */
+   gap: 2px; /* 항목 간 간격 */
+}
+
+/* 마이페이지 사진 영역 스타일 */
+.my-page-photo {
+   background-color: #ddd; /* 배경 색상 */
+   height: 150px; /* 높이 */
+   display: flex; /* 플렉스박스 레이아웃 */
+   justify-content: center; /* 가운데 정렬 */
+   align-items: center; /* 세로 방향 가운데 정렬 */
+   font-size: 20px; /* 글꼴 크기 */
+   font-weight: bold; /* 글꼴 두께 */
+   border-radius: 10px; /* 테두리 둥글게 */
+}
+
+/* 버튼 그룹 스타일 (가로 배치) */
+.buttons {
+   display: flex; /* 플렉스박스 레이아웃 */
+   justify-content: center; /* 버튼들을 가운데 정렬 */
+   gap: 20px; /* 버튼 간격 */
+   margin-top: 20px; /* 위쪽 여백 설정 */
+}
+
+/* 버튼 기본 스타일 */
+button {
+   flex: 1;
+   padding: 10px 20px; /* 내부 여백 */
+   font-size: 16px; /* 글꼴 크기 */
+   border: none; /* 테두리 없음 */
+   border-radius: 5px; /* 테두리 둥글게 */
+   cursor: pointer; /* 마우스 커서 모양 변경 */
+   background-color: #007bff; /* 기본 배경 색상 */
+   color: white; /* 글자 색상 */
+   transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+   text-align: center; /* 텍스트 가운데 정렬 */
+   min-width: 150px; /* 최소 너비 설정 */
+   height: 50px; /* 고정 높이 설정 */
+}
+
+button:hover {
+   background-color: #0056b3;
+}
+
+/* 홈 버튼 추가 스타일 */
+.home-button {
+   background-color: #1a8cff; /* 배경 색상 */
+}
+
+.home-button:hover {
+   background-color: #3399ff; /* 호버 시 배경 색상 */
+}
+
+/* 쿠폰 내역 버튼 스타일 */
+.coupon-history {
+   background-color: #1a8cff; /* 배경 색상 */
+}
+
+.coupon-history:hover {
+   background-color: #3399ff; /* 호버 시 배경 색상 */
+}
+
+/* 쿠폰 등록 버튼 스타일 */
+.coupon-registration {
+   background-color: #1a8cff; /* 배경 색상 */
+}
+
+.coupon-registration:hover {
+   background-color: #3399ff; /* 호버 시 배경 색상 */
+}
+
+/* 주문 내역 버튼 스타일 */
+.order-history {
+   background-color: #1a8cff; /* 배경 색상 */
+}
+
+.order-history:hover {
+   background-color: #3399ff; /* 호버 시 배경 색상 */
+}
+
+/* 탈퇴 버튼 스타일 */
+.logout-button {
+   background-color: #1a8cff; /* 배경 색상 */
+}
+
+.logout-button:hover {
+   background-color: #3399ff; /* 호버 시 배경 색상 */
+}
+
+/* 내 정보 수정 및 회원정보 수정 버튼 */
+.edit-info-button {
+   background-color: #1a8cff; /* 배경 색상 */
+}
+
+.edit-info-button:hover {
+   background-color: #3399ff; /* 호버 시 배경 색상 */
+}
+
+.user-info-buttons {
+   display: flex; /* 플렉스박스 레이아웃 */
+   justify-content: center; /* 가운데 정렬 */
+   gap: 20px; /* 버튼 간 간격 설정 */
+   margin-top: 20px; /* 위쪽 여백 설정 */
+}
+
+/* 최근 주문 내역 영역 스타일 */
+.recent-orders {
+   background-color: #fff; /* 배경 색상 */
+   padding: 20px; /* 내부 여백 */
+   border-radius: 10px; /* 테두리 둥글게 */
+   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+   font-size: 18px; /* 글꼴 크기 */
+   font-weight: bold; /* 글꼴 두께 */
+   text-align: center; /* 가운데 정렬 */
+}

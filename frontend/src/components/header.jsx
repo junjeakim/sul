@@ -24,7 +24,9 @@ const Header = ({ userId, onMenuClick }) => {
                      <button id="cart" aria-label="장바구니" onClick={() => navigate('/cart')}>
                         장바구니
                      </button>
-                     <button id="myPageBtn">마이페이지</button>
+                     <button id="myPageBtn" aria-label="마이페이지" onClick={() => navigate('/mypage')}>
+                        마이페이지
+                     </button>
                      <button
                         id="logoutBtn"
                         onClick={() => {

@@ -21,7 +21,10 @@ import ProductDeliveryPage from './ProductDeliveryPage.jsx' // 상품 받는법 
 import PickupStore from './PickupStore.jsx' // 픽업 매장 선택 페이지 컴포넌트
 import ConvenienceFeatures from './components/ConvenienceFeatures.jsx' // 편의기능 컴포넌트 경로
 import { AuthProvider } from './script/AuthContext.js' // AuthContext 경로
-import ShoppingCart from './product list/cart.jsx'
+import ShoppingCart from './product list/cart.jsx' // 장바구니 페이지 경로
+import NaverRedirect from './member/NaverRedirect.js'
+import Cart from './member/Mypage.jsx'
+import MyPage from './member/Mypage.jsx'
 
 function App() {
    return (
@@ -51,6 +54,8 @@ function App() {
                      <Route path="/pickup-store" element={<PickupStore />} />
                      {/* 새로운 경로 추가 */}
                      <Route path="/cart" element={<ShoppingCart />} />
+                     <Route path="/naver-redirect" element={<NaverRedirect />} /> {/* 리다이렉트 라우트 */}
+                     <Route path="/Mypage" element={<MyPage />} />
                   </Routes>
                </div>
             </div>
