@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style/style.css"; // CSS 파일 경로
 import Box from "@mui/joy/Box";
 import Typography from "@mui/joy/Typography";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "./script/AuthContext"; // 경로 수정
 
 const MainPage = () => {
   const [modalContent, setModalContent] = useState(null); // 모달 내용 상태
+  const { login, isLoggedIn } = useAuth(); // isLoggedIn 상태 추가
+  const navigate = useNavigate();
 
   const products = [
     {
@@ -50,6 +54,58 @@ const MainPage = () => {
     setModalContent(null);
   };
 
+  // 네이버 로그인 콜백 처리
+  useEffect(() => {
+    console.log("isLoggedIn 상태 확인:", isLoggedIn); // 로그인 상태 출력
+
+    const handleNaverCallback = async () => {
+      const url = new URL(window.location.href);
+      const code = url.searchParams.get("code");
+      const state = url.searchParams.get("state");
+
+      if (code) {
+        try {
+          const response = await fetch(
+            `http://localhost:8081/api/naver/token?code=${code}&state=${state}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          const data = await response.json();
+          const accessToken = data.access_token;
+
+          if (accessToken) {
+            const loginResponse = await fetch(
+              "http://localhost:8081/api/naver/login",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ accessToken }),
+              }
+            );
+            const loginData = await loginResponse.json();
+            console.log("네이버 로그인 성공:", loginData);
+
+            login(); // 로그인 함수 호출
+            console.log("로그인 함수 호출됨");
+
+            window.history.replaceState(null, null, "/"); // URL에서 'code'와 'state' 파라미터 제거
+            navigate("/"); // 메인 페이지로 리디렉션
+          }
+        } catch (error) {
+          console.error("네이버 로그인 실패:", error);
+        }
+      }
+    };
+
+    handleNaverCallback();
+  }, [login, navigate, isLoggedIn]);
+
   const renderContent = () => {
     return (
       <div>
@@ -81,6 +137,7 @@ const MainPage = () => {
             </div>
           ))}
         </div>
+        {/* 이전 코드... */}
         {modalContent && (
           <div className="modal" onClick={closeModal}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -109,6 +166,11 @@ const MainPage = () => {
                     __html: modalContent.description,
                   }}
                 />
+                <div className="modal-buttons">
+                  <button className="modal-button">관심상품 등록</button>
+                  <button className="modal-button">장바구니 추가</button>
+                  <button className="modal-button">바로구매 하기</button>
+                </div>
               </div>
             </div>
           </div>

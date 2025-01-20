@@ -194,6 +194,7 @@ const VodcaPage = () => {
               <div className="modal-buttons">
                 <button className="modal-button">관심상품 등록</button>
                 <button className="modal-button">장바구니 추가</button>
+                <button className="modal-button">바로구매 하기</button>
               </div>
             </div>
           </div>

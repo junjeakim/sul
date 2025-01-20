@@ -1,4 +1,4 @@
-package com.back.Component;
+/* package com.back.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -47,3 +47,4 @@ public class JwtTokenProvider {
         }
     }
 }
+*/

@@ -11,7 +11,6 @@ div#wrap {
    width: 100%;
    border-radius: 4px;
    margin: 0 auto;
-
 }
 
 h1 {
@@ -251,6 +250,29 @@ p {
    margin: 10px 0;
    width: 100%;
    box-sizing: border-box;
+}
+
+/* 모달 버튼 스타일 */
+.modal-buttons {
+   display: flex;
+   justify-content: center;
+   margin-top: 20px;
+}
+
+.modal-button {
+   padding: 10px 20px;
+   font-size: 16px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   background-color: #007bff;
+   color: white;
+   margin: 0 10px;
+   transition: background-color 0.3s ease;
+}
+
+.modal-button:hover {
+   background-color: #0056b3;
 }
 
 span {

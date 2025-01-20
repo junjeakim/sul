@@ -23,11 +23,8 @@ public class MemberController {
             // Create the user and save it to the database
             memberService.saveMember(member);
 
-            // Generate the JWT token for the newly registered user
-            String token = memberService.generateJwtToken(member);
-
-            // Return JWT token on successful registration
-            return ResponseEntity.ok(token);
+            // Return success message on successful registration
+            return ResponseEntity.ok("Registration successful");
 
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Server error occurred during registration.");

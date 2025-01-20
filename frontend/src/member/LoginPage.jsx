@@ -5,26 +5,18 @@ import "../style/LoginPage.css";
 import idImage from "./../images/ID이미지.jpg";
 import pwImage from "./../images/pwimg.jpg";
 import kakaoLoginImage from "./../images/kakao_login_medium_narrow.png";
-import naverLoginImage from "./../images/naver_login.png"; // 네이버 로그인 이미지 추가
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ userId: "", password: "" });
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  // Initialize Kakao SDK
   useEffect(() => {
     const loadKakaoSDK = () => {
       if (window.Kakao) {
         if (!window.Kakao.isInitialized()) {
-          console.log("Initializing Kakao SDK...");
           window.Kakao.init("ed0242863785c5895aa99910e1dc3f1a");
-          console.log("Kakao SDK Initialized: ", window.Kakao.isInitialized());
-        } else {
-          console.log("Kakao SDK already initialized.");
         }
-      } else {
-        console.error("Kakao SDK not loaded.");
       }
     };
 
@@ -35,72 +27,6 @@ const LoginPage = () => {
     }
   }, []);
 
-  // 네이버 로그인 함수 (팝업 창 열기)
-  const handleNaverLogin = () => {
-    const naverLoginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=token&client_id=S40I8qDoUEfjS3b8P4FU&redirect_uri=http://localhost:3000/auth/naver/callback&state=STATE_STRING`;
-    const width = 500;
-    const height = 600;
-    const left = window.screen.width / 2 - width / 2;
-    const top = window.screen.height / 2 - height / 2;
-    const newWindow = window.open(
-      naverLoginUrl,
-      "NaverLogin",
-      `width=${width},height=${height},top=${top},left=${left},resizable=no,scrollbars=no`
-    );
-
-    const checkPopupClosed = setInterval(() => {
-      if (newWindow.closed) {
-        clearInterval(checkPopupClosed);
-        try {
-          const url = new URL(newWindow.location.href);
-          const hash = url.hash.substring(1);
-          const params = new URLSearchParams(hash);
-          const accessToken = params.get("access_token");
-
-          if (accessToken) {
-            // 부모 창에 액세스 토큰 전달
-            window.opener.postMessage({ accessToken }, window.location.origin);
-          }
-        } catch (error) {
-          console.error("팝업 창 URL 파싱 중 오류 발생:", error);
-        }
-      }
-    }, 1000);
-  };
-
-  useEffect(() => {
-    // 부모 창에서 액세스 토큰을 받아 백엔드로 전달
-    const handleMessage = (event) => {
-      if (event.origin !== window.location.origin) return;
-      const { accessToken } = event.data;
-      if (accessToken) {
-        fetch("http://localhost:8080/api/naver/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ accessToken }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("네이버 로그인 성공:", data);
-            login(); // Assuming login is a function from AuthContext
-            navigate("/"); // Redirect after successful login
-            window.location.reload(); // 헤더 갱신
-          })
-          .catch((error) => {
-            console.error("네이버 로그인 실패:", error);
-          });
-      }
-    };
-
-    window.addEventListener("message", handleMessage, false);
-
-    return () => {
-      window.removeEventListener("message", handleMessage, false);
-    };
-  }, [login, navigate]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const { userId, password } = formData;
@@ -110,7 +36,6 @@ const LoginPage = () => {
       return;
     }
 
-    // Simulate login process
     alert("아이디 또는 비밀번호가 잘못되었습니다.");
   };
 
@@ -119,12 +44,10 @@ const LoginPage = () => {
       window.Kakao.Auth.login({
         scope: "profile_nickname,profile_image",
         success: (authObj) => {
-          console.log("카카오 로그인 성공:", authObj);
           login(); // Assuming login is a function from AuthContext
-          navigate("/"); // Redirect after successful login
+          navigate("/"); // 성공 후 메인 페이지로 리디렉션
         },
         fail: (error) => {
-          console.error("카카오 로그인 실패:", error);
           alert("카카오 로그인에 실패했습니다. 다시 시도해주세요.");
         },
       });
@@ -185,13 +108,6 @@ const LoginPage = () => {
                 onClick={handleKakaoLogin}
               >
                 <img src={kakaoLoginImage} alt="카카오 로그인" />
-              </button>
-              <button
-                type="button"
-                className="naver-btn"
-                onClick={handleNaverLogin}
-              >
-                <img src={naverLoginImage} alt="네이버 로그인" />
               </button>
               <div className="login_bottom clfix">
                 <p>

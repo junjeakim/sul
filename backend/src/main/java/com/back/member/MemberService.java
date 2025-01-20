@@ -4,16 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.back.Component.JwtTokenProvider;
-
 @Service
 public class MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
-
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -27,10 +22,5 @@ public class MemberService {
     // Check if the ID is duplicated
     public boolean isIdDuplicated(String mId) {
         return memberRepository.existsById(mId);
-    }
-
-    // Generate a JWT token for a user
-    public String generateJwtToken(Member member) {
-        return jwtTokenProvider.createToken(member);
     }
 }
