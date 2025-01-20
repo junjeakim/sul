@@ -31,6 +31,7 @@ public class TossController {
             HttpHeaders headers = new HttpHeaders();
             headers.setBasicAuth(SECRET_KEY, "test_sk_6BYq7GWPVvPY2DOJGEEL8NE5vbo1"); // 올바른 Toss Secret Key 사용
             headers.setContentType(MediaType.APPLICATION_JSON);
+            
 
             // 요청 데이터 설정
             Map<String, Object> body = new HashMap<>();

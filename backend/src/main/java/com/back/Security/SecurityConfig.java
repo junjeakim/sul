@@ -15,9 +15,14 @@ public class SecurityConfig {
         return http.cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .requestMatchers("/api/member/**", "/api/kakao/login").permitAll()  // Allow access to these endpoints
+                .requestMatchers("/api/member/**", "/api/kakao/login",  "/api/payments/**").permitAll()  // Allow access to these endpoints
                 .anyRequest().authenticated()  // Protect other endpoints
                 .and()
                 .build();
     }
+    
+    
+    
+    
+    
 }

@@ -26,6 +26,7 @@ import ProductDeliveryPage from './ProductDeliveryPage.jsx' // 상품 받는법 
 import PickupStore from './PickupStore.jsx' // 픽업 매장 선택 페이지 컴포넌트
 import MyPage from './member/MyPage.jsx' // 마이페이지 컴포넌트 추가
 import CallbackPage from './components/NaverCallbackPage.jsx' // 콜백 페이지 컴포넌트 추가
+import CartPage from './product list/cart.jsx' // 장바구니 페이지 컴포넌트 추가
 
 // 인증 관련
 import { AuthProvider } from './script/AuthContext.js' // AuthContext 경로
@@ -73,6 +74,8 @@ function App() {
                      <Route path="/mypage" element={<MyPage />} /> {/* 마이페이지 경로 추가 */}
                      {/* 네이버 로그인 콜백 경로 */}
                      <Route path="/callback" element={<CallbackPage />} /> {/* 콜백 페이지 경로 추가 */}
+                     <Route path="/cart" element={<CartPage />} />
+                     {/* 장바구니 페이지 경로 추가 */}
                   </Routes>
                </div>
             </div>
