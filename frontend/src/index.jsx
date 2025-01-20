@@ -79,7 +79,7 @@ const MainPage = () => {
                const data = await response.json()
                console.log('네이버 로그인 데이터:', data)
 
-               // 이후 로직
+               // 로그인 처리 등 이후 로직 추가
             } catch (error) {
                console.error('네이버 로그인 실패:', error)
             }
@@ -165,7 +165,9 @@ const MainPage = () => {
                      fontSize: '1.5rem',
                      textAlign: 'center',
                   }}
-               ></Typography>
+               >
+                  {/* Heading or any additional text can go here */}
+               </Typography>
                {renderContent()}
             </Box>
          </div>

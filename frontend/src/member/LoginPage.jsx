@@ -42,8 +42,14 @@ const LoginPage = () => {
             scope: 'profile_nickname,profile_image',
             success: (authObj) => {
                console.log('카카오 로그인 성공:', authObj)
-               login() // Assuming login is a function from AuthContext
-               navigate('/') // Redirect after successful login
+               // 카카오 로그인 후 사용자 정보 추출
+               const kakaoUser = {
+                  userId: authObj.id,
+                  nickname: authObj.profile.nickname,
+                  profileImage: authObj.profile.profile_image,
+               }
+               login(kakaoUser) // 카카오 로그인 사용자 정보 저장
+               navigate('/') // 로그인 후 리다이렉트
             },
             fail: (error) => {
                console.error('카카오 로그인 실패:', error)
@@ -76,7 +82,8 @@ const LoginPage = () => {
       axios
          .post('http://localhost:8081/api/member/login', { userId, password })
          .then((response) => {
-            login() // 로그인 처리
+            const userData = response.data
+            login(userData) // 서버로부터 받은 사용자 데이터로 로그인 처리
             navigate('/') // 로그인 후 리다이렉트
          })
          .catch((error) => {
@@ -130,5 +137,5 @@ const LoginPage = () => {
       </div>
    )
 }
-//로그인페이지
+
 export default LoginPage
