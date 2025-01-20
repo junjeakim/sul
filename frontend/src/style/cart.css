@@ -1,57 +1,103 @@
-/* 테이블 스타일 */
-#cartlist table {
-   width: 70%;
-   max-width: 100%; /* 테이블이 100%를 넘지 않도록 제한 */
-   border-collapse: collapse;
-   margin-left: 20%; /* 왼쪽 여백을 0으로 설정 */
-   margin-right: auto; /* 오른쪽 여백을 자동으로 설정하여 왼쪽부터 줄어들게 */
-   margin-bottom: 20px;
-   text-align: center; /* 테이블 내 모든 내용 정렬을 중앙으로 설정 */
+div.wrap {
+   padding-left: 300px;
+   padding-right: 300px;
+   min-height: 75vh;
 }
+
+#cartlist table {
+   width: 100%;
+   max-width: 100%;
+   border-collapse: collapse;
+   margin: 0 auto;
+   margin-bottom: 20px;
+   text-align: center;
+}
+
 #cartlist table th,
 #cartlist table td {
    padding: 10px;
    border: 1px solid #ddd;
-   text-align: center; /* 중앙 정렬 */
+   text-align: center;
 }
 
 #cartlist table th {
    background-color: #f4f4f4;
 }
 
+/* 열 너비 조정 */
+#cartlist .image-col {
+   width: 10%;
+   /* 사진 열 너비 설정 */
+}
+
+#cartlist .name-col {
+   width: 40%;
+   /* 상품명 열 너비 설정 */
+}
+
+#cartlist .quantity-col {
+   width: 15%;
+   /* 총수량 열 너비 설정 */
+}
+
+#cartlist .price-col {
+   width: 15%;
+   /* 판매가 열 너비 설정 */
+}
+
+#cartlist .total-col {
+   width: 15%;
+   /* 합계 열 너비 설정 */
+}
+
+#cartlist .delete-col {
+   width: 5%;
+   /* 삭제 열 너비 설정 */
+}
+
 #cartlist table td img {
    max-width: 50px;
    height: auto;
-   display: block; /* 이미지를 block으로 처리하여 부모 셀 내에서 중앙 정렬되도록 함 */
-   margin: 0 auto; /* 이미지의 좌우 여백을 자동으로 설정하여 중앙 정렬 */
+   display: block;
+   margin: 0 auto;
 }
 
-/* 장바구니 총액 스타일 */
 h3 {
    font-size: 15px;
    color: #333;
    font-weight: bold;
-   text-align: center; /* 총액도 중앙 정렬 */
+   text-align: center;
 }
 
-/* 푸터 스타일 */
 .footer {
-   text-align: center; /* 푸터 버튼을 중앙에 배치 */
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   padding-left: 1%;
+   width: 100%;
 }
 
 .footer button {
-   background-color: #0066ff;
-   width: 150px;
-   color: white;
-   border: none;
-   margin: 0 10px;
+   flex: none;
    padding: 10px 20px;
    font-size: 16px;
+   border: 2px solid rgb(22, 38, 53);
    border-radius: 5px;
    cursor: pointer;
-   transition: background-color 0.3s ease;
+   background-color: white;
+   color: rgb(22, 38, 53);
+   transition: background-color 0.3s ease, color 0.3s ease;
+   text-align: center;
+   min-width: 150px;
+   height: 40px;
+   margin-right: 10px;
+}
+
+.footer button:last-child {
+   margin-right: 0;
 }
 
 .footer button:hover {
-   background-color: #1a75ff;
+   background-color: rgb(22, 38, 53);
+   color: white;
 }

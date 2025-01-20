@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.back.api.member.dao.MemberDao">
+    
+    <!-- 아이디 중복 확인 -->
+    <select id="getCheckId" parameterType="String" resultType="int">
+        SELECT COUNT(mId) FROM member WHERE mId = #{mId}
+    </select>
+
+    <!-- 회원 등록 -->
+    <insert id="insertMember" parameterType="com.back.api.member.dto.MemberDto">
+        INSERT INTO member (mId, mPw, mName, mBirthday, mAddr, mEmail, mPhone, regTm)
+        VALUES (#{mId}, #{mPw}, #{mName}, #{mBirthday}, #{mAddr}, #{mEmail}, #{mPhone}, NOW())
+    </insert>
+
+    <!-- 회원 조회 -->
+    <select id="getMember" parameterType="String" resultType="com.back.api.member.dto.MemberDto">
+        SELECT * FROM member WHERE mId = #{mId}
+    </select>
+</mapper>

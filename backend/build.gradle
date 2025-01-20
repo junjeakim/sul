@@ -11,6 +11,9 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17) // Ensure Java 17 is used
     }
+    tasks.withType(JavaCompile) {
+        options.compilerArgs += '-parameters'  // Ensure -parameters flag is passed to the compiler
+    }
 }
 
 repositories {
@@ -24,7 +27,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     // Database dependencies
-    runtimeOnly 'com.mysql:mysql-connector-j' 
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    //runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
 
     // JSON Web Token (JWT)
@@ -45,10 +49,15 @@ dependencies {
     
     // Servlet API
     implementation 'jakarta.servlet:jakarta.servlet-api'  // Corrected this line
-    
 }
-
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+// Add '-parameters' compiler argument
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-parameters"
+}
+
+

@@ -1,0 +1,138 @@
+div.product-wrap {
+   padding-left: 300px;
+   /* 페이지 좌우 여백 추가 */
+   padding-right: 300px;
+   /* 페이지 좌우 여백 추가 */
+   min-height: 75vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   background-color: #f4f4f4;
+}
+
+.product-wrap h1 {
+   text-align: center;
+   margin-top: 20px;
+}
+
+.product-pages {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 20px;
+   justify-content: center;
+   width: 1100px;
+   /* 고정된 너비 */
+   margin-top: 20px;
+   background-color: #f4f4f4;
+}
+
+.product-page-card-custom {
+   border: 1px solid #ccc;
+   border-radius: 8px;
+   text-align: center;
+   width: 240px;
+   /* 크기 증가 */
+   height: 400px;
+   /* 크기 증가 */
+   transition: transform 0.2s;
+   box-sizing: border-box;
+   /* 박스 크기를 정확히 맞추기 위함 */
+   padding: 0;
+   /* 패딩 제거 */
+   margin: 10px;
+   /* 카드 간격 설정 */
+}
+
+.product-page-card-custom:hover {
+   transform: scale(1.05);
+}
+
+.product-page-card-custom img {
+   width: 230px;
+   /* 고정된 너비 */
+   height: 230px;
+   /* 고정된 높이 */
+   object-fit: cover;
+   /* 이미지 비율을 유지하면서 고정된 크기에 맞춤 */
+   display: block;
+   margin: 0 auto;
+   /* 이미지 중앙 정렬 */
+}
+
+.delete-button {
+   flex: 1;
+   padding: 10px 20px;
+   font-size: 16px;
+   border: 2px solid rgb(22, 38, 53);
+   border-radius: 5px;
+   cursor: pointer;
+   background-color: white;
+   color: rgb(22, 38, 53);
+   transition: background-color 0.3s ease, color 0.3s ease;
+   text-align: center;
+   min-width: 150px;
+   height: 50px;
+   margin-top: 20px;
+}
+
+.delete-button:hover {
+   background-color: rgb(22, 38, 53);
+   color: white;
+}
+
+.product-modal {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: fixed;
+   z-index: 1;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   overflow: auto;
+   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.product-modal-content {
+   background-color: white;
+   padding: 20px;
+   border: 1px solid #888;
+   width: 560px;
+   /* 고정된 가로 크기 */
+   border-radius: 10px;
+   text-align: center;
+}
+
+.product-close {
+   color: #aaa;
+   float: right;
+   font-size: 28px;
+   font-weight: bold;
+}
+
+.product-close:hover,
+.product-close:focus {
+   color: black;
+   text-decoration: none;
+   cursor: pointer;
+}
+
+.product-confirm-delete {
+   background-color: #8b0000;
+   /* 배경색 */
+   color: white;
+   /* 글자색 */
+   border: none;
+   padding: 10px 20px;
+   font-size: 16px;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+   margin-top: 20px;
+}
+
+.product-confirm-delete:hover {
+   background-color: #b22222;
+   /* 하버 색 */
+}
