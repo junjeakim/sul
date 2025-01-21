@@ -23,7 +23,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Integer id) {
+    public ResponseEntity<Product> getProductById(@PathVariable("id") Integer id) {
         Optional<Product> product = productService.getProductById(id);
         return product.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -45,24 +45,27 @@ public class ProductController {
             Product product = productService.saveProduct(file, subject, content, price, category);
             return ResponseEntity.ok(product);
         } catch (Exception e) {
-            return ResponseEntity.status(500).build();
+            System.err.println("제품 업로드 중 오류 발생: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new Product());
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteProduct(@PathVariable Integer id) {
+    public ResponseEntity<String> deleteProduct(@PathVariable("id") Integer productId) {
         try {
-            boolean isDeleted = productService.deleteProduct(id);
+            boolean isDeleted = productService.deleteProduct(productId);
             if (isDeleted) {
                 return ResponseEntity.ok("제품이 성공적으로 삭제되었습니다.");
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 제품을 찾을 수 없습니다. ID: " + id);
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("해당 제품을 찾을 수 없습니다.");
             }
         } catch (Exception e) {
             System.err.println("제품 삭제 중 오류 발생: " + e.getMessage());
-            e.printStackTrace(); // 서버 로그 확인
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("제품 삭제 중 서버 오류가 발생했습니다.");
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("제품 삭제 중 오류가 발생했습니다: " + e.getMessage());
         }
     }
-
 }

@@ -15,11 +15,8 @@ import java.util.UUID;
 
 @Service
 public class ProductService {
-
     @Autowired
     private ProductRepository productRepository;
-
-    // 정적 리소스 경로로 변경
     private final Path root = Paths.get("src/main/resources/static/images");
 
     public List<Product> getAllProducts() {
@@ -40,7 +37,7 @@ public class ProductService {
             try {
                 Path filePath = root.resolve(product.get().getStoredFilename());
                 System.out.println("삭제 대상 파일 경로: " + filePath.toAbsolutePath());
-
+                
                 // 파일 삭제 로직
                 if (Files.exists(filePath)) {
                     Files.delete(filePath);
@@ -48,11 +45,10 @@ public class ProductService {
                 } else {
                     System.out.println("삭제할 파일이 존재하지 않습니다: " + filePath);
                 }
-
+                
                 // 데이터베이스에서 제품 삭제
                 productRepository.deleteById(id);
                 System.out.println("데이터베이스에서 제품 삭제 성공: ID=" + id);
-
                 return true;
             } catch (Exception e) {
                 System.err.println("파일 삭제 또는 데이터베이스 삭제 중 오류 발생: " + e.getMessage());
@@ -65,24 +61,19 @@ public class ProductService {
         }
     }
 
-
-
     public Product saveProduct(MultipartFile file, String subject, String content, String price, String category) throws Exception {
         if (!Files.exists(root)) {
             Files.createDirectories(root);
         }
-
-        // UUID로 고유한 파일명 생성
+        
         String uniqueFileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
         Files.copy(file.getInputStream(), root.resolve(uniqueFileName));
-
         Product product = new Product();
         product.setSubject(subject);
         product.setContent(content);
         product.setPrice(price);
         product.setCategory(category);
         product.setStoredFilename(uniqueFileName);
-
         return productRepository.save(product);
     }
 }

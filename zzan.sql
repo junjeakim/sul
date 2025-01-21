@@ -142,6 +142,7 @@ REPLACE INTO `notice` (`idx`, `title`, `content`, `id`, `regTM`) VALUES
 	(5, '공지사항입니다05.', '공지사항임', 'admin', '2024-11-15 07:11:30');
 
 -- 테이블 zzan.order 구조 내보내기
+
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
   `oNum` int(11) NOT NULL AUTO_INCREMENT,
@@ -159,36 +160,51 @@ CREATE TABLE IF NOT EXISTS `order` (
 -- 테이블 데이터 zzan.order:~0 rows (대략적) 내보내기
 
 -- 테이블 zzan.orderproduct 구조 내보내기
+ALTER TABLE `orderproduct` DROP FOREIGN KEY `orderNum`;
+ALTER TABLE `orderproduct` DROP FOREIGN KEY `orderProduct`;
 DROP TABLE IF EXISTS `orderproduct`;
+
 CREATE TABLE IF NOT EXISTS `orderproduct` (
-  `opNum` int(11) NOT NULL AUTO_INCREMENT,
-  `productCode` int(11) NOT NULL,
-  `orderNum` int(11) NOT NULL,
-  `price` int(11) NOT NULL,
-  `opQuantity` int(11) NOT NULL,
+  `opNum` INT(11) NOT NULL AUTO_INCREMENT,
+  `productCode` INT(11) NOT NULL,
+  `orderNum` INT(11) NOT NULL,
+  `price` INT(11) NOT NULL,
+  `opQuantity` INT(11) NOT NULL,
   PRIMARY KEY (`opNum`),
   KEY `orderNum_idx` (`orderNum`),
   KEY `orderProduct_idx` (`productCode`),
-  CONSTRAINT `orderNum` FOREIGN KEY (`orderNum`) REFERENCES `order` (`oNum`),
-  CONSTRAINT `orderProduct` FOREIGN KEY (`productCode`) REFERENCES `product` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  CONSTRAINT `orderNumFK` FOREIGN KEY (`orderNum`) REFERENCES `order` (`oNum`),
+  CONSTRAINT `orderProductFK` FOREIGN KEY (`productCode`) REFERENCES `product` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 테이블 데이터 zzan.orderproduct:~0 rows (대략적) 내보내기
 
+
 -- 테이블 zzan.product 구조 내보내기
+DELETE FROM `product`;
+ALTER TABLE `product` AUTO_INCREMENT = 1;
+
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `subject` char(255) NOT NULL,
-  `original_filename` char(255) DEFAULT NULL,
-  `stored_filename` char(255) DEFAULT NULL,
-  `file_size` bigint(20) DEFAULT NULL,
-  `content` text NOT NULL,
-  `price` varchar(255) NOT NULL,
-  `upload_date` timestamp NULL DEFAULT current_timestamp(),
-  `category` char(50) DEFAULT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `subject` VARCHAR(255) NOT NULL,
+  `original_filename` VARCHAR(255) DEFAULT NULL,
+  `stored_filename` VARCHAR(255) DEFAULT NULL,
+  `file_size` BIGINT(20) DEFAULT NULL,
+  `content` TEXT NOT NULL,
+  `price` VARCHAR(255) NOT NULL,
+  `upload_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `category` VARCHAR(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `orderproduct`
+ADD CONSTRAINT `orderProduct`
+FOREIGN KEY (`cpPrCode`) REFERENCES `product`(`id`)
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+
 
 -- 테이블 데이터 zzan.product:~4 rows (대략적) 내보내기
 REPLACE INTO `product` (`id`, `subject`, `original_filename`, `stored_filename`, `file_size`, `content`, `price`, `upload_date`, `category`) VALUES
@@ -208,3 +224,11 @@ select * from member;
 select * from notice;
 select * from orderproduct;
 select * from product;
+
+DELETE FROM product;
+
+SELECT * FROM cartproduct WHERE cpPrCode = 44;
+SELECT * FROM orderproduct WHERE productCode = 44;
+
+
+select * from cartproduct;
