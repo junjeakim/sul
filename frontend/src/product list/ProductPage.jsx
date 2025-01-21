@@ -62,8 +62,10 @@ const ProductPage = () => {
                 src={`http://localhost:8081/images/${product.storedFilename}`}
                 alt={product.subject}
               />
+              <br/>
               <div>{product.subject}</div>
               <div>{product.price}</div>
+              <div>{product.category}</div>
               <button
                 className="delete-button"
                 onClick={() => openModal(product)}

@@ -17,10 +17,10 @@ import BoardPage from "./boardpage.jsx"; // 게시판 페이지 컴포넌트
 import InquiryPage from "./inquirypage.jsx"; // 문의 페이지 컴포넌트
 import NoticePage from "./noticepage.jsx"; // 공지사항 페이지 컴포넌트
 import AdminPage from "./admin/adminpage.jsx"; // 관리자 페이지 컴포넌트
-import WhiskyPage from "./whisky.jsx"; // Whisky 페이지 컴포넌트
-import WinePage from "./wine.jsx"; // Wine 페이지 컴포넌트
-import VodcaPage from "./vodca.jsx"; // Vodca 페이지 컴포넌트
-import TraditionalPage from "./traditional.jsx"; // Traditional 페이지 컴포넌트
+import WhiskyPage from "./juru/whisky.jsx"; // Whisky 페이지 컴포넌트
+import WinePage from "./juru/wine.jsx"; // Wine 페이지 컴포넌트
+import VodcaPage from ".//juru/vodca.jsx"; // Vodca 페이지 컴포넌트
+import TraditionalPage from "./juru/traditional.jsx"; // Traditional 페이지 컴포넌트
 import MapPage from "./MapPage.jsx"; // 오시는길 페이지 컴포넌트
 import ProductDeliveryPage from "./ProductDeliveryPage.jsx"; // 상품 받는법 페이지 컴포넌트
 import PickupStore from "./PickupStore.jsx"; // 픽업 매장 선택 페이지 컴포넌트

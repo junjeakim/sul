@@ -6,7 +6,7 @@ const ProductForm = () => {
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
   const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("whisky");
   const [file, setFile] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -49,8 +49,7 @@ const ProductForm = () => {
         </div>
         <div>
           <label>설명:</label>
-          <input
-            type="text"
+          <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
@@ -65,11 +64,15 @@ const ProductForm = () => {
         </div>
         <div>
           <label>카테고리:</label>
-          <input
-            type="text"
+          <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-          />
+          >
+            <option value="whisky">Whisky</option>
+            <option value="wine">Wine</option>
+            <option value="vodka">Vodka</option>
+            <option value="traditional">Traditional</option>
+          </select>
         </div>
         <div>
           <label>이미지 파일:</label>
