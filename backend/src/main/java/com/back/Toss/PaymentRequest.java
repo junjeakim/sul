@@ -1,9 +1,9 @@
 package com.back.Toss;
 
 public class PaymentRequest {
-    private String orderId;
-    private String orderName;
-    private int amount;
+    private String orderId;   // 주문 ID
+    private String orderName; // 주문 이름
+    private int amount;       // 금액
 
     // Getters and Setters
     public String getOrderId() {

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../script/AuthContext'
+import { useAuth } from '../script/AuthContext' // 경로 수정
 import '../style/header_style.css'
 import Logo from '../images/Logo-removebg.png'
 
-const Header = ({ userId, onMenuClick }) => {
+const Header = ({ onMenuClick }) => {
    const { isLoggedIn, logout } = useAuth()
    const navigate = useNavigate()
 

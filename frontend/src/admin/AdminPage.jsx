@@ -3,9 +3,9 @@ import WhiskyPage from '../juru/whisky.jsx' // WhiskyPage 컴포넌트 경로
 import WinePage from '../juru/wine.jsx' // WinePage 컴포넌트 경로
 import VodcaPage from '../juru/vodca.jsx' // VodcaPage 컴포넌트 경로
 import TraditionalPage from '../juru/traditional.jsx' // TraditionalPage 컴포넌트 경로
-import BoardPage from '../boardpage.jsx' // BoardPage 컴포넌트 경로
-import InquiryPage from '../inquirypage.jsx' // InquiryPage 컴포넌트 경로
-import NoticePage from '../noticepage.jsx' // NoticePage 컴포넌트 경로
+import BoardPage from '../notice board/boardpage.jsx' // BoardPage 컴포넌트 경로
+import InquiryPage from '../notice board/inquirypage.jsx' // InquiryPage 컴포넌트 경로
+import NoticePage from '../notice board/noticepage.jsx' // NoticePage 컴포넌트 경로
 import '../style/style.css' // CSS 파일 경로
 
 const AdminPage = () => {

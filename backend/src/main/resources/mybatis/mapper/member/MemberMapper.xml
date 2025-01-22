@@ -3,10 +3,10 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.back.api.member.dao.MemberDao">
-    
-    <!-- 아이디 중복 확인 -->
+
+    <!-- 아이디 중복 확인 (대소문자 구분 없이 확인) -->
     <select id="getCheckId" parameterType="String" resultType="int">
-        SELECT COUNT(mId) FROM member WHERE mId = #{mId}
+        SELECT COUNT(mId) FROM member WHERE LOWER(mId) = LOWER(#{mId})
     </select>
 
     <!-- 회원 등록 -->
@@ -15,8 +15,16 @@
         VALUES (#{mId}, #{mPw}, #{mName}, #{mBirthday}, #{mAddr}, #{mEmail}, #{mPhone}, NOW())
     </insert>
 
-    <!-- 회원 조회 -->
+    <!-- 회원 조회 (대소문자 구분 없이 조회) -->
     <select id="getMember" parameterType="String" resultType="com.back.api.member.dto.MemberDto">
-        SELECT * FROM member WHERE mId = #{mId}
+        SELECT * FROM member WHERE LOWER(mId) = LOWER(#{mId})
     </select>
+
+    <!-- 비밀번호 업데이트 -->
+    <update id="updateMember" parameterType="com.back.api.member.dto.MemberDto">
+        UPDATE member
+        SET mPw = #{mPw}
+        WHERE mId = #{mId}
+    </update>
+
 </mapper>

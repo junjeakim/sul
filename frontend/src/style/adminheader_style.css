@@ -1,0 +1,197 @@
+@charset "UTF-8";
+@import url('./style_Reset.css');
+
+body {
+	min-width: 1920px;
+	/* 가로 스크롤바 제거 */
+	margin: 0;
+	padding: 0 150px;
+	position: relative;
+	padding-bottom: 130px;
+	padding-top: 60px;
+	/* 헤더 높이만큼 본문 내용에 상단 패딩 추가 */
+}
+
+/* 헤더 */
+header#header {
+	width: 100%;
+	/* 전체 너비를 100%로 설정 */
+	max-width: 1920px;
+	position: fixed;
+	top: 0;
+	/* 상단에 고정 */
+	left: 0;
+	/* 좌측에 고정 */
+	z-index: 9999;
+	/* 가로 스크롤바 제거 */
+	margin: 0 auto;
+}
+
+/* 상단 헤더 */
+div#h_top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #86592d;
+	padding: 0 200px;
+	height: 60px;
+}
+
+#headerLogo {
+	height: 50px;
+}
+
+div#searchArea {
+	display: flex;
+	align-items: center;
+}
+
+#searchKey {
+	width: 300px;
+	height: 35px;
+	padding: 0 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+#searchButton {
+	margin-left: 10px;
+	padding: 8px 12px;
+	background-color: #8b0000;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+#searchButton:hover {
+	background-color: #b22222;
+}
+
+div#btnArea>button,
+div#searchArea button {
+	font-size: 18px;
+	padding: 4px 10px;
+}
+
+/* 버튼 영역 */
+#H_btnArea button {
+	margin-left: 15px;
+	padding: 8px 30px;
+	background-color: #8b0000;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+#H_btnArea button:hover {
+	background-color: #b22222;
+}
+
+#H_btnArea .home-btn {
+	background-color: #8B0000;
+}
+
+#H_btnArea .home-btn:hover {
+	background-color: #B22222;
+}
+
+.delete-btn {
+	background-color: #d9534f;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-size: 1em;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+	background-color: #c9302c;
+}
+
+/* 하단 메뉴 */
+div#admin.h_bottom {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 15px 200px;
+	overflow: visible;
+	/* 서브메뉴가 정상적으로 표시되도록 설정 */
+	position: relative;
+	/* 하위 요소들이 z-index 영향을 받을 수 있도록 설정 */
+}
+
+#headerMenu {
+	display: flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	position: relative;
+	z-index: 1;
+	justify-content: center;  /* 가운데 정렬 */
+}
+
+#headerMenu>li {
+	position: relative;
+	margin: 0 20px;
+	width: 130px;
+	font-size: 20px;
+	padding: 5px 12px;
+	text-align: center;
+	cursor: pointer;
+	transition: background-color 1s, color 1s;
+	z-index: 100;
+}
+
+#headerMenu>li:hover {
+	background-color: #86592d;
+	color: white;
+}
+
+#headerMenu .subMenus {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 10000;
+	/* 서브메뉴가 본문 내용보다 위에 나오도록 */
+	background-color: rgba(255, 255, 255, 0.95);
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	overflow: visible;
+	padding: 5px 0;
+	opacity: 0;
+	transition: opacity 0.3s ease, transform 0.3s ease;
+	transform: translateY(-10px);
+}
+
+#headerMenu .subMenus>li {
+	padding: 8px 15px;
+	white-space: nowrap;
+}
+
+#headerMenu .subMenus>li:hover {
+	background-color: rgba(0, 0, 0, 0.2);
+	color: white;
+}
+
+#headerMenu>li:hover .subMenus {
+	display: block;
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* 반응형 */
+@media (max-width: 1300px) {
+	#H_btnArea {
+		width: 400px;
+	}
+}
+
+.input-height-match {
+	height: 40px;
+}

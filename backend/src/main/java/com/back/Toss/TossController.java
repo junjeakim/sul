@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
-import com.back.Toss.PaymentRequest;  // Adjust this import based on your package structure
-
 import java.util.Map;
 
 @RestController
@@ -29,15 +27,15 @@ public class TossController {
             // 헤더 설정
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.setBasicAuth(secretKey); // Toss Secret Key from application.properties
+            headers.set("Authorization", "Bearer " + secretKey); // 인증 방식 수정
 
             // 요청 데이터 설정
             Map<String, Object> paymentRequest = Map.of(
                 "orderId", request.getOrderId(),
                 "orderName", request.getOrderName(),
                 "amount", request.getAmount(),
-                "successUrl", "http://localhost:3000/success",
-                "failUrl", "http://localhost:3000/fail"
+                "successUrl", "http://localhost:3000/success", // 결제 성공 URL
+                "failUrl", "http://localhost:3000/fail" // 결제 실패 URL
             );
 
             // 요청 엔티티 생성
@@ -54,11 +52,12 @@ public class TossController {
             return ResponseEntity.ok(response.getBody());
         } catch (HttpClientErrorException | HttpServerErrorException e) {
             e.printStackTrace();
-            // Return appropriate error response based on HTTP error status
-            return ResponseEntity.status(e.getStatusCode()).body(e.getResponseBodyAsString());
+            // 에러 응답 본문 반환
+            String errorResponse = e.getResponseBodyAsString();
+            return ResponseEntity.status(e.getStatusCode()).body(errorResponse);
         } catch (Exception e) {
             e.printStackTrace();
-            // Return a generic error message for unexpected exceptions
+            // 예상치 못한 오류 처리
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("결제 요청 중 오류가 발생했습니다.");
         }
     }

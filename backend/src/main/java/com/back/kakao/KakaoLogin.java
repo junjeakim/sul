@@ -1,15 +1,30 @@
 package com.back.kakao;
 
 import java.util.Map;
-import org.springframework.http.*;
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+
+import com.back.jwt.JwtService;
 
 @RestController
 @RequestMapping("/api/kakao")
 @CrossOrigin(origins = "http://localhost:3000")
 public class KakaoLogin {
+
+    @Autowired
+    private JwtService jwtService; // JWT 서비스 의존성 주입 (JWT 생성 및 유효성 검증)
 
     @PostMapping("/login")
     public ResponseEntity<?> kakaoLogin(@RequestBody Map<String, String> tokenMap) {
@@ -40,7 +55,14 @@ public class KakaoLogin {
                 String.class
             );
 
-            return ResponseEntity.ok(response.getBody()); // 사용자 정보 반환
+            // 3. 사용자 정보 파싱
+            String userInfo = response.getBody();
+            // 여기에 필요한 사용자 정보 파싱 코드 추가 (예: 닉네임, 프로필 이미지 등)
+            
+            // 4. JWT 발급
+            String jwtToken = jwtService.createToken(userInfo); // 사용자 정보를 기반으로 JWT 생성
+
+            return ResponseEntity.ok(new LoginResponse(jwtToken, userInfo)); // JWT와 사용자 정보 반환
         } catch (HttpClientErrorException e) {
             System.err.println("카카오 API 호출 중 오류: " + e.getMessage());
             return ResponseEntity.status(e.getStatusCode()).body("카카오 API 호출 중 오류: " + e.getMessage());

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./style/notice.css"; // 스타일 경로
+import "../style/notice.css"; // 스타일 경로
 
 const NoticePage = () => {
   const [selectedNotice, setSelectedNotice] = useState(null); // 선택된 공지사항 상태 추가
