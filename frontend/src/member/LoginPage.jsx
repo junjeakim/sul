@@ -15,16 +15,12 @@ const LoginPage = () => {
    // Initialize Kakao SDK
    useEffect(() => {
       const loadKakaoSDK = () => {
-         if (window.Kakao) {
-            if (!window.Kakao.isInitialized()) {
-               console.log('Initializing Kakao SDK...')
-               window.Kakao.init('ed0242863785c5895aa99910e1dc3f1a')
-               console.log('Kakao SDK Initialized: ', window.Kakao.isInitialized())
-            } else {
-               console.log('Kakao SDK already initialized.')
-            }
+         if (window.Kakao && !window.Kakao.isInitialized()) {
+            console.log('Initializing Kakao SDK...')
+            window.Kakao.init('ed0242863785c5895aa99910e1dc3f1a')
+            console.log('Kakao SDK Initialized: ', window.Kakao.isInitialized())
          } else {
-            console.error('Kakao SDK not loaded.')
+            console.log('Kakao SDK already initialized.')
          }
       }
 
@@ -42,12 +38,15 @@ const LoginPage = () => {
             scope: 'profile_nickname,profile_image',
             success: (authObj) => {
                console.log('카카오 로그인 성공:', authObj)
-               // 카카오 로그인 후 사용자 정보 추출
+
+               // 카카오 로그인 정보에서 userId, nickname, profileImage를 정확하게 가져옵니다.
                const kakaoUser = {
-                  userId: authObj.id,
-                  nickname: authObj.profile.nickname,
-                  profileImage: authObj.profile.profile_image,
+                  userId: authObj.id, // authObj.id에서 userId를 정확히 가져옵니다.
+                  nickname: authObj.properties?.nickname || '닉네임 없음', // properties 객체에서 nickname
+                  profileImage: authObj.properties?.profile_image || '기본 이미지 URL', // properties 객체에서 profile_image
                }
+
+               console.log('카카오 사용자 정보:', kakaoUser) // 사용자 정보 확인
                login(kakaoUser) // 카카오 로그인 사용자 정보 저장
                navigate('/') // 로그인 후 리다이렉트
             },
@@ -83,7 +82,14 @@ const LoginPage = () => {
          .post('http://localhost:8081/api/member/login', { userId, password })
          .then((response) => {
             const userData = response.data
-            login(userData) // 서버로부터 받은 사용자 데이터로 로그인 처리
+
+            // 서버로부터 받은 토큰을 localStorage에 저장
+            if (response.data.token) {
+               localStorage.setItem('authToken', response.data.token)
+               console.log('저장된 토큰:', response.data.token) // 여기서 토큰 확인
+            }
+
+            login(userData) // 사용자 데이터로 로그인 처리
             navigate('/') // 로그인 후 리다이렉트
          })
          .catch((error) => {

@@ -48,12 +48,9 @@ div.product-wrap {
 }
 
 .product-page-card-custom img {
-   width: 230px;
-   /* 고정된 너비 */
-   height: 230px;
-   /* 고정된 높이 */
-   object-fit: cover;
-   /* 이미지 비율을 유지하면서 고정된 크기에 맞춤 */
+   width: 100%;
+   height: 60%;
+   object-fit: contain;
    display: block;
    margin: 0 auto;
    /* 이미지 중앙 정렬 */
