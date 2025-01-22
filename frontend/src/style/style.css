@@ -109,6 +109,10 @@ span {
    transition: transform 0.3s, box-shadow 0.3s;
    position: relative;
    cursor: pointer;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+      /* 가운데 정렬 */
 }
 
 .product-card-small:hover {
@@ -154,6 +158,7 @@ span {
    width: 100%;
    height: 75%;
    object-fit: contain;
+   
 }
 
 .main-product-image {

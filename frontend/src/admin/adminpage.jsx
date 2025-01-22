@@ -76,18 +76,6 @@ const AdminPage = () => {
       default:
         return (
           <div>
-            <div id="mainImgSlideArea">
-              <div id="slideshow">
-                <img
-                  src={require("../images/slide/slide01.jpg")}
-                  alt="slideImg"
-                />
-                <img
-                  src={require("../images/slide/slide02.jpg")}
-                  alt="slideImg"
-                />
-              </div>
-            </div>
             <h2>Best List</h2>
             <div id="itemListArea" className="dFlex">
               {products.map((product, index) => (

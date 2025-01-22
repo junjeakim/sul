@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../style/myPage.css";
+import "../style/MyPage.css";
 import myPageImage from "../images/mypage_main.png"; // 이미지 경로 수정
 
 const MyPage = () => {

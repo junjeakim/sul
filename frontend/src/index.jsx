@@ -2,49 +2,29 @@ import React, { useState, useEffect } from "react";
 import "./style/style.css"; // CSS 파일 경로
 import Box from "@mui/joy/Box";
 import Typography from "@mui/joy/Typography";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "./script/AuthContext"; // 경로 수정
+import axios from "axios";
 
 const MainPage = () => {
-  const [modalContent, setModalContent] = useState(null); // 모달 내용 상태
-  const { login, isLoggedIn } = useAuth(); // isLoggedIn 상태 추가
-  const navigate = useNavigate();
+  const [modalContent, setModalContent] = useState(null);
+  const [products, setProducts] = useState([]);
 
-  const products = [
-    {
-      name: "앱솔루트 (750ml)",
-      price: "23,000원",
-      originalPrice: "30,000원",
-      image: require("./images/bodca/absolute.jpg"),
-      description: `앱솔루트 보드카는 스웨덴에서 생산된 프리미엄 보드카로,
-        순수한 물과 100% 천연 재료만을 사용하여 만들어졌습니다.
-        강렬하면서도 부드러운 맛과 깔끔한 뒷맛이 특징입니다.`,
-    },
-    {
-      name: "패스포트 위스키 (500ml)",
-      price: "25,200원",
-      originalPrice: "30,000원",
-      image: require("./images/whisky/passport500.png"),
-      description: `패스포트는 시바스 브라더스의 아이코닉 블렌디드 스카치 위스키로,
-        스코틀랜드 스페이사이드 지역의 원액을 사용하며 누구든 부담 없이 즐길 수 있습니다.`,
-    },
-    {
-      name: "임페리얼 17년 (500ml)",
-      price: "120,000원",
-      originalPrice: "180,000원",
-      image: require("./images/whisky/Imperial17.jpg"),
-      description: `임페리얼 17년은 최상급 스카치 위스키로,
-        바닐라향과 과일맛의 균형 잡힌 부드러움을 느낄 수 있습니다.`,
-    },
-    {
-      name: "그레이구스 (750ml)",
-      price: "68,000원",
-      originalPrice: "80,000원",
-      image: require("./images/bodca/greygoose.png"),
-      description: `세계 최초의 프랑스산 프리미엄 보드카로,
-        고품질 재료와 5회 증류 과정을 거쳐 생산됩니다.`,
-    },
-  ];
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8081/api/products?category=main"
+        );
+        setProducts(
+          response.data.filter((product) => product.category === "main")
+        );
+        console.log("Main products:", response.data); // 디버깅 로그 추가
+      } catch (error) {
+        console.error("제품 목록을 불러오는 중 오류가 발생했습니다.", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const handleCardClick = (product) => {
     setModalContent(product);
@@ -54,153 +34,164 @@ const MainPage = () => {
     setModalContent(null);
   };
 
-  // 네이버 로그인 콜백 처리
-  useEffect(() => {
-    console.log("isLoggedIn 상태 확인:", isLoggedIn); // 로그인 상태 출력
-
-    const handleNaverCallback = async () => {
-      const url = new URL(window.location.href);
-      const code = url.searchParams.get("code");
-      const state = url.searchParams.get("state");
-
-      if (code) {
-        try {
-          const response = await fetch(
-            `http://localhost:8081/api/naver/token?code=${code}&state=${state}`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
-          const data = await response.json();
-          const accessToken = data.access_token;
-
-          if (accessToken) {
-            const loginResponse = await fetch(
-              "http://localhost:8081/api/naver/login",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ accessToken }),
-              }
-            );
-            const loginData = await loginResponse.json();
-            console.log("네이버 로그인 성공:", loginData);
-
-            login(); // 로그인 함수 호출
-            console.log("로그인 함수 호출됨");
-
-            window.history.replaceState(null, null, "/"); // URL에서 'code'와 'state' 파라미터 제거
-            navigate("/"); // 메인 페이지로 리디렉션
-          }
-        } catch (error) {
-          console.error("네이버 로그인 실패:", error);
-        }
-      }
+  const handlePayment = async (product) => {
+    const amount = parseInt(product.price.replace(/,|원/g, ""), 10); // 콤마와 "원" 제거 후 숫자로 변환
+    const orderData = {
+      orderId: `${Date.now()}`, // 고유 주문 ID 생성
+      orderName: product.name,
+      amount,
     };
 
-    handleNaverCallback();
-  }, [login, navigate, isLoggedIn]);
+    const token = localStorage.getItem("authToken"); // 'authToken'은 저장된 토큰의 키
 
-  const renderContent = () => {
-    return (
-      <div>
-        <div id="mainImgSlideArea">
-          <div id="slideshow">
-            <img src={require("./images/slide/slide01.jpg")} alt="slideImg" />
-            <img src={require("./images/slide/slide02.jpg")} alt="slideImg" />
-          </div>
-        </div>
-        <h2>Best List</h2>
-        <div id="itemListArea" className="dFlex">
-          {products.map((product, index) => (
-            <div
-              key={index}
-              className="product-card-small"
-              onClick={() => handleCardClick(product)}
-            >
-              <div className="itemImgArea">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="product-image"
-                />
-              </div>
-              <div className="itemTxtarea product-info">
-                <span>{product.name}</span>
-                <span>{product.price}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-        {/* 이전 코드... */}
-        {modalContent && (
-          <div className="modal" onClick={closeModal}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <span className="close" onClick={closeModal}>
-                &times;
-              </span>
-              <div className="modal-left">
-                <img
-                  src={modalContent.image}
-                  alt={modalContent.name}
-                  className="modal-image"
-                />
-              </div>
-              <div className="modal-right">
-                <h2 className="modal-title">{modalContent.name}</h2>
-                <hr className="custom-divider" />
-                <p className="modal-price">
-                  <span className="original-price">
-                    {modalContent.originalPrice}
-                  </span>{" "}
-                  <span className="discount-price">{modalContent.price}</span>
-                </p>
-                <p
-                  className="modal-description"
-                  dangerouslySetInnerHTML={{
-                    __html: modalContent.description,
-                  }}
-                />
-                <div className="modal-buttons">
-                  <button className="modal-button">관심상품 등록</button>
-                  <button className="modal-button">장바구니 추가</button>
-                  <button className="modal-button">바로구매 하기</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    );
+    if (!token || !isTokenValid(token)) {
+      alert("유효한 토큰이 없습니다. 로그인 후 다시 시도해주세요.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8081/api/payments/initiate",
+        orderData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // 올바른 템플릿 리터럴 사용
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.data.paymentUrl) {
+        window.location.href = response.data.paymentUrl; // 결제 페이지로 이동
+      } else {
+        alert("결제 URL을 가져오는 데 실패했습니다.");
+      }
+    } catch (error) {
+      alert("결제 요청 중 오류가 발생했습니다.");
+      console.error("결제 오류:", error.response?.data || error.message);
+    }
   };
+
+  const handleAddToCart = (product) => {
+    alert(`${product.name}이(가) 장바구니에 추가되었습니다.`);
+  };
+
+  const handleAddToWishlist = (product) => {
+    alert(`${product.name}이(가) 관심상품으로 등록되었습니다.`);
+  };
+
+  const isTokenValid = (token) => {
+    if (!token) return false;
+    try {
+      const decodedToken = JSON.parse(atob(token.split(".")[1]));
+      console.log("디코딩된 토큰:", decodedToken); // 디코딩된 토큰 출력
+      const expirationTime = decodedToken.exp * 1000;
+      const currentTime = Date.now();
+      return currentTime < expirationTime;
+    } catch (e) {
+      console.error("토큰 디코딩 오류:", e);
+      return false;
+    }
+  };
+
+  const renderContent = () => (
+    <div>
+      <div id="mainImgSlideArea">
+        <div id="slideshow">
+          <img src={require("./images/slide/slide01.jpg")} alt="slideImg" />
+          <img src={require("./images/slide/slide02.jpg")} alt="slideImg" />
+        </div>
+      </div>
+      <h2>Best List</h2>
+      <div id="itemListArea" className="dFlex">
+        {products.map((product, index) => (
+          <div
+            key={index}
+            className="product-card-small"
+            onClick={() => handleCardClick(product)}
+          >
+            <div className="itemImgArea">
+              <img
+                src={`http://localhost:8081/images/${product.storedFilename}`} // 경로 수정
+                alt={product.subject}
+                className="product-image"
+              />
+            </div>
+            <div className="itemTxtArea product-info">
+              <span>{product.subject}</span>
+              <br/>
+              <span>{product.price}원</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {modalContent && (
+        <div className="modal" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <span className="close" onClick={closeModal}>
+              &times;
+            </span>
+            <div className="modal-left">
+              <img
+                src={`http://localhost:8081/images/${modalContent.storedFilename}`} // 경로 수정
+                alt={modalContent.subject}
+                className="modal-image"
+              />
+            </div>
+            <div className="modal-right">
+              <h2 className="modal-title">{modalContent.subject}</h2>
+              <hr className="custom-divider" /> {/* 수평선 추가 */}
+              <p className="modal-price">
+                <span className="original-price">
+                  {modalContent.originalPrice}원
+                </span>
+                <span className="discount-price">{modalContent.price}원</span>
+              </p>
+              <p className="modal-description">{modalContent.content}</p>
+              <div className="modal-buttons">
+                <button
+                  className="modal-button"
+                  onClick={() => handleAddToWishlist(modalContent)}
+                >
+                  관심상품 등록
+                </button>
+                <button
+                  className="modal-button"
+                  onClick={() => handleAddToCart(modalContent)}
+                >
+                  장바구니 추가
+                </button>
+                <button
+                  className="modal-button"
+                  onClick={() => handlePayment(modalContent)}
+                >
+                  바로구매 하기
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <div className="wrap">
-      <div id="wrap">
-        <Box
+      <Box
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      >
+        <Typography
+          level="h6"
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            textTransform: "uppercase",
+            mb: 2,
+            fontSize: "1.5rem",
+            textAlign: "center",
           }}
-        >
-          <Typography
-            level="h6"
-            sx={{
-              textTransform: "uppercase",
-              mb: 2,
-              fontSize: "1.5rem",
-              textAlign: "center",
-            }}
-          ></Typography>
-          {renderContent()}
-        </Box>
-      </div>
+        />
+        {renderContent()}
+      </Box>
     </div>
   );
 };

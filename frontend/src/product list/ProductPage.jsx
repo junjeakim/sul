@@ -62,7 +62,7 @@ const ProductPage = () => {
                 src={`http://localhost:8081/images/${product.storedFilename}`}
                 alt={product.subject}
               />
-              <br/>
+              <br />
               <div>{product.subject}</div>
               <div>{product.price}</div>
               <div>{product.category}</div>

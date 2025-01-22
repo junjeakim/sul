@@ -72,6 +72,7 @@ const ProductForm = () => {
             <option value="wine">Wine</option>
             <option value="vodka">Vodka</option>
             <option value="traditional">Traditional</option>
+            <option value="main">Main</option> {/* New Category */}
           </select>
         </div>
         <div>

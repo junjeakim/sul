@@ -19,15 +19,17 @@ import NoticePage from "./noticepage.jsx"; // 공지사항 페이지 컴포넌�
 import AdminPage from "./admin/adminpage.jsx"; // 관리자 페이지 컴포넌트
 import WhiskyPage from "./juru/whisky.jsx"; // Whisky 페이지 컴포넌트
 import WinePage from "./juru/wine.jsx"; // Wine 페이지 컴포넌트
-import VodcaPage from ".//juru/vodca.jsx"; // Vodca 페이지 컴포넌트
+import VodcaPage from "./juru/vodca.jsx"; // Vodca 페이지 컴포넌트
 import TraditionalPage from "./juru/traditional.jsx"; // Traditional 페이지 컴포넌트
 import MapPage from "./MapPage.jsx"; // 오시는길 페이지 컴포넌트
 import ProductDeliveryPage from "./ProductDeliveryPage.jsx"; // 상품 받는법 페이지 컴포넌트
 import PickupStore from "./PickupStore.jsx"; // 픽업 매장 선택 페이지 컴포넌트
 import MyPage from "./member/MyPage.jsx"; // 마이페이지 컴포넌트 추가
-import CartPage from "./product list/CartPage.jsx"; // 장바구니 페이지 컴포넌트 추가
-import ProductPage from "./product list/ProductPage.jsx"; // 제품 페이지 컴포넌트 추가
-import ProductForm from "./product list/ProductForm.jsx"; // 제품 등록 페이지 컴포넌트 추가
+import CartPage from "./product list/cart.jsx"; // 장바구니 페이지 컴포넌트 추가
+import SuccessPage from "./script/SuccessPage.js";
+import FailPage from "./script/FailPage.js";
+import ProductPage from "./product list/ProductPage.jsx";
+import ProductForm from "./product list/ProductForm"; // 경로 확인
 
 // 인증 관련
 import { AuthProvider } from "./script/AuthContext.js"; // AuthContext 경로
@@ -78,14 +80,15 @@ function App() {
                 element={<ProductDeliveryPage />}
               />
               <Route path="/pickup-store" element={<PickupStore />} />
-              <Route path="/mypage" element={<MyPage />} />
+              <Route path="/mypage" element={<MyPage />} />{" "}
               {/* 마이페이지 경로 추가 */}
+              {/* 콜백 페이지 경로 추가 */}
               <Route path="/cart" element={<CartPage />} />
               {/* 장바구니 페이지 경로 추가 */}
-              <Route path="/productPage" element={<ProductPage />} />
-              {/* 제품 페이지 경로 추가 */}
+              <Route path="/success" element={<SuccessPage />} />
+              <Route path="/fail" element={<FailPage />} />
+              <Route path="/Product" element={<ProductPage />} />
               <Route path="/ProductForm" element={<ProductForm />} />
-              {/* 제품 등록 페이지 경로 추가 */}
             </Routes>
           </div>
         </div>

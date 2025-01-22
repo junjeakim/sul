@@ -1,44 +1,49 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
-// AuthContext 생성
 const AuthContext = createContext();
 
+export const useAuth = () => useContext(AuthContext); // useAuth 훅을 export합니다.
+
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    return JSON.parse(localStorage.getItem("isLoggedIn")) || false;
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    // storedUser가 'undefined'나 null이 아니고 유효한 JSON일 경우만 파싱
+    try {
+      return storedUser && storedUser !== "undefined"
+        ? JSON.parse(storedUser)
+        : null;
+    } catch (e) {
+      console.error("Error parsing stored user:", e);
+      return null;
+    }
   });
 
-  const navigate = useNavigate();
-
-  const login = () => {
-    console.log("login 함수 호출됨"); // 로그인 함수 호출 로그 추가
-    setIsLoggedIn(true);
-    localStorage.setItem("isLoggedIn", JSON.stringify(true));
-    navigate("/"); // 로그인 후 메인 페이지로 리디렉션
+  const login = (userData) => {
+    setUser(userData);
+    localStorage.setItem("user", JSON.stringify(userData));
   };
 
   const logout = () => {
-    setIsLoggedIn(false);
-    localStorage.setItem("isLoggedIn", JSON.stringify(false));
-    navigate("/LoginPage"); // 로그아웃 후 로그인 페이지로 리디렉션
+    setUser(null);
+    localStorage.removeItem("user");
   };
 
+  const isLoggedIn = Boolean(user); // Check if user is logged in
+
   useEffect(() => {
-    // 로그인 상태 확인
-    const checkLoginStatus = () => {
-      const loggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
-      setIsLoggedIn(loggedIn || false);
-    };
-    checkLoginStatus();
+    const storedUser = localStorage.getItem("user");
+    try {
+      if (storedUser && storedUser !== "undefined") {
+        setUser(JSON.parse(storedUser));
+      }
+    } catch (e) {
+      console.error("Error parsing stored user on load:", e);
+    }
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, isLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );
 };
-
-// Context를 쉽게 사용할 수 있는 커스텀 훅
-export const useAuth = () => useContext(AuthContext);
