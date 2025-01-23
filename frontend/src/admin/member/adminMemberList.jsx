@@ -1,59 +1,66 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "./../../style/adminMemberList.css"; // 올바른 스타일 경로
+import React, { useState, useEffect } from 'react'
+import './../../style/adminMemberList.css' // CSS 파일 경로
 
-const AdminMemberList = () => {
-  const [members, setMembers] = useState([]);
+const MemberList = () => {
+   const [members, setMembers] = useState([])
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8081/api/members")
-      .then((response) => {
-        setMembers(response.data);  // 서버에서 반환하는 데이터가 올바른지 확인
+   useEffect(() => {
+      // 멤버 목록을 가져오는 API 호출을 여기에 추가
+      fetch('/api/members') // 예시 API 엔드포인트
+         .then((response) => response.json())
+         .then((data) => {
+            if (Array.isArray(data)) {
+               setMembers(data)
+            } else {
+               console.error('API 응답이 배열이 아닙니다:', data)
+            }
+         })
+   }, [])
+
+   const deleteMember = (memberId) => {
+      // 회원 삭제 API 호출
+      fetch(`/api/members/${memberId}`, { method: 'DELETE' }).then((response) => {
+         if (response.ok) {
+            setMembers(members.filter((member) => member.id !== memberId))
+         } else {
+            console.error('회원 삭제 실패:', response)
+         }
       })
-      .catch((error) => {
-        console.error("There was an error fetching the member data!", error);
-      });
-  }, []);
+   }
 
-  return (
-    <div className="delivery-container">
-      <h1>회원관리</h1>
-      <table className="admin-table">
-        <thead>
-          <tr>
-            <th>이름</th>
-            <th>회원 ID</th>
-            <th>회원 비밀번호</th>
-            <th>생년월일</th>
-            <th>주소</th>
-            <th>이메일</th>
-            <th>핸드폰번호</th>
-            <th>가입일</th>
-            <th>관리</th>
-          </tr>
-        </thead>
-        <tbody>
-          {members.map((member, index) => (
-            <tr key={index}>
-              <td>{member.mName}</td> {/* 서버에서 제공하는 데이터에 맞게 수정 */}
-              <td>{member.mId}</td>
-              <td>{member.mPw}</td>
-              <td>{member.mBirthday}</td>
-              <td>{member.mAddr}</td>
-              <td>{member.mEmail}</td>
-              <td>{member.mPhone}</td>
-              <td>{member.regTM}</td> {/* 가입일 필드명을 확인 */}
-              <td>
-                <button onClick={() => alert("회원 정보 수정")}>수정</button>
-                <button onClick={() => alert("회원 삭제")}>삭제</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
+   return (
+      <div className="admin-member-list-content">
+         <h1>회원 목록</h1>
+         <table className="admin-member-table">
+            <thead>
+               <tr>
+                  <th>사진</th>
+                  <th>이름</th>
+                  <th>이메일</th>
+                  <th>가입일</th>
+                  <th>삭제</th>
+               </tr>
+            </thead>
+            <tbody>
+               {members.map((member, index) => (
+                  <tr key={index}>
+                     <td>
+                        <img src={member.photo} alt={`${member.name}'s photo`} className="member-photo" />
+                     </td>
+                     <td>{member.name}</td>
+                     <td>{member.email}</td>
+                     <td>{member.joinDate}</td>
+                     <td>
+                        <button onClick={() => deleteMember(member.id)} className="admin-member-button">
+                           삭제
+                        </button>
+                     </td>
+                  </tr>
+               ))}
+            </tbody>
+         </table>
+      </div>
+   )
+}
 
-export default AdminMemberList;
+export default MemberList

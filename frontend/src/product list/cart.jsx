@@ -10,10 +10,12 @@ const CartPage = () => {
    useEffect(() => {
       const fetchCartItems = async () => {
          try {
-            const response = await axios.get('http://localhost:8081/api/cart?userId=test01') // userId는 실제 사용자 ID로 교체
+            const response = await axios.get('http://localhost:8081/api/cart?userId=test01')
+            console.log('response data: ', response.data)
             setCartItems(response.data)
          } catch (error) {
-            console.error('장바구니 목록을 불러오는 중 오류가 발생했습니다.', error)
+            console.error(`장바구니 목록을 불러오는 중 오류가 발생했습니다.`, error)
+            alert(`장바구니 항목을 불러오는 중 오류가 발생했습니다. (오류 코드: ${error.response?.status})`)
          }
       }
 
@@ -27,7 +29,7 @@ const CartPage = () => {
          })
          if (response.status === 200) {
             const updatedItem = response.data
-            setCartItems(cartItems.map((item) => (item.id === id ? updatedItem : item)))
+            setCartItems(cartItems.map((item) => (item.cpCode === id ? updatedItem : item)))
          }
       } catch (error) {
          console.error('장바구니 아이템 수량을 업데이트하는 중 오류가 발생했습니다.', error)
@@ -38,7 +40,7 @@ const CartPage = () => {
       try {
          const response = await axios.delete(`http://localhost:8081/api/cart/${id}`)
          if (response.status === 200) {
-            setCartItems(cartItems.filter((item) => item.id !== id))
+            setCartItems(cartItems.filter((item) => item.cpCode !== id))
          }
       } catch (error) {
          console.error('장바구니 아이템을 삭제하는 중 오류가 발생했습니다.', error)
@@ -72,12 +74,12 @@ const CartPage = () => {
                         </td>
                         <td className="name-col">{item.subject}</td>
                         <td className="quantity-col">
-                           <input type="number" value={item.cpQuantity} onChange={(e) => updateCartItemQuantity(item.id, parseInt(e.target.value, 10))} />
+                           <input type="number" value={item.cpQuantity} onChange={(e) => updateCartItemQuantity(item.cpCode, parseInt(e.target.value, 10))} />
                         </td>
                         <td className="price-col">{item.price}원</td>
                         <td className="total-col">{item.price * parseInt(item.cpQuantity, 10)}원</td>
                         <td className="delete-col">
-                           <button onClick={() => removeCartItem(item.id)}>삭제</button>
+                           <button onClick={() => removeCartItem(item.cpCode)}>삭제</button>
                         </td>
                      </tr>
                   ))}
