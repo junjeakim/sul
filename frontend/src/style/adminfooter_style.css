@@ -1,33 +1,25 @@
 @charset "UTF-8";
 @import url('./style_Reset.css');
 
-/* 푸터 스타일 */
-footer#footer {
-	width: 100%;
-	/* 전체 너비를 100%로 설정 */
-	max-width: 1920px;
-	/* 최대 너비 설정 */
-	height: 150px;
-	position: fixed;
-	bottom: 0;
-	/* 하단에 고정 */
-	left: 0;
-	/* 좌측에 고정 */
-	margin: 0 auto;
-	/* 가로 중앙 배치 */
-	padding: 20px 30px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	background-color: #aaa;
-	box-sizing: border-box;
-	/* 패딩과 보더 포함한 전체 크기 계산 */
+/* admin 푸터 스타일 */
+.admin-footer {
+   width: 1920px;
+   margin: 0 auto;
+   bottom: 0;
+   z-index: 9999;
+   position: relative;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 20px 200px;
+   background-color: #aaa;
+   box-sizing: border-box;
 }
 
-#footer>div#footerTxtArea {
-	font-size: 16px;
+.admin-footerTxtArea {
+   font-size: 16px;
 }
 
-#footer>div#adminArea {
-	border: 1px solid #000;
+.admin-adminArea {
+   border: 1px solid #000;
 }
