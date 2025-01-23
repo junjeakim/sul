@@ -1,19 +1,19 @@
 import React from "react";
-import "../style/footer_style.css"; // CSS 경로 확인
+import "./../../style/adminfooter_style.css"; // 수정된 스타일 파일
 import { Link } from "react-router-dom";
 
-const Footer = () => {
+const AdminFooter = () => {
   const goAdmin = () => {
-    alert("Admin 페이지로 이동합니다.");
+    alert("사용자 페이지로 이동합니다.");
   };
 
   return (
-    <footer id="footer" className="dFlex">
+    <footer className="admin-footer dFlex">
       <hr />
-      <div id="LogoArea">
-        <img src={require("../images/Logo-removebg.png")} alt="Logo" />
+      <div className="admin-LogoArea">
+        <img src={require("./../../images/Logo-removebg.png")} alt="Logo" />
       </div>
-      <div id="footerTxtArea">
+      <div className="admin-footerTxtArea">
         <address>
           서울특별시 구로구 구로동 하이미디어
           <br />
@@ -24,11 +24,11 @@ const Footer = () => {
         </address>
         <p>COPYRIGHT BY DRINKS INTERNATIONAL. All Rights Reserved.</p>
       </div>
-      <div id="adminArea">
-        <Link to="/admin/main" onClick={goAdmin}>
+      <div className="admin-adminArea">
+        <Link to="/" onClick={goAdmin}>
           <img
-            src={require("../images/goAdmin_200.jpg")}
-            alt="관리자 페이지로 이동"
+            src={require("./../../images/goAdmin_200.jpg")}
+            alt="사용자 페이지로 이동"
           />
         </Link>
       </div>
@@ -36,4 +36,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default AdminFooter;

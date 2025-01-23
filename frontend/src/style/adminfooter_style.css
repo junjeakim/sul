@@ -1,0 +1,25 @@
+@charset "UTF-8";
+@import url('./style_Reset.css');
+
+/* admin 푸터 스타일 */
+.admin-footer {
+    width: 1920px;
+    margin: 0 auto;
+    bottom: 0;
+    z-index: 9999;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 200px;
+    background-color: #aaa;
+    box-sizing: border-box;
+}
+
+.admin-footerTxtArea {
+    font-size: 16px;
+}
+
+.admin-adminArea {
+    border: 1px solid #000;
+}

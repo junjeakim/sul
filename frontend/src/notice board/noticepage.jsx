@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./style/notice.css"; // 스타일 경로
+import "../style/notice.css"; // 스타일 경로
 
 const NoticePage = () => {
   const [selectedNotice, setSelectedNotice] = useState(null); // 선택된 공지사항 상태 추가
@@ -57,51 +57,50 @@ const NoticePage = () => {
   ];
 
   return (
-     <div className="wrap">
-    <div className="board-page">
-      <h1>공지사항</h1>
-      <table className="post-table">
-        <thead>
-          <tr>
-            <th>제목</th>
-            <th>작성일</th>
-          </tr>
-        </thead>
-        <tbody>
-          {notices.map((notice) => (
-            <tr
-              key={notice.id}
-              onClick={() => setSelectedNotice(notice)}
-              style={{ cursor: "pointer" }}
-            >
-              <td>{notice.title}</td>
-              <td>{notice.date}</td>
+    <div className="wrap">
+      <div className="board-page">
+        <h1>공지사항</h1>
+        <table className="post-table">
+          <thead>
+            <tr>
+              <th>제목</th>
+              <th>작성일</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      {selectedNotice && (
-        <div className="modal board-modal">
-          <div className="modal-content board-modal-content">
-            <h2>{selectedNotice.title}</h2>
-            <div className="modal-body board-modal-body">
-              <p>{selectedNotice.content}</p>
+          </thead>
+          <tbody>
+            {notices.map((notice) => (
+              <tr
+                key={notice.id}
+                onClick={() => setSelectedNotice(notice)}
+                style={{ cursor: "pointer" }}
+              >
+                <td>{notice.title}</td>
+                <td>{notice.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {selectedNotice && (
+          <div className="modal board-modal">
+            <div className="modal-content board-modal-content">
+              <h2>{selectedNotice.title}</h2>
+              <div className="modal-body board-modal-body">
+                <p>{selectedNotice.content}</p>
+              </div>
+              <div className="post-footer">작성일: {selectedNotice.date}</div>
+              <button
+                onClick={() => setSelectedNotice(null)}
+                className="close-btn"
+              >
+                닫기
+              </button>
             </div>
-            <div className="post-footer">작성일: {selectedNotice.date}</div>
-            <button
-              onClick={() => setSelectedNotice(null)}
-              className="close-btn"
-            >
-              닫기
-            </button>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* 연락처 정보와 저작권 세부 사항 */}
-      <div className="footer">
+        {/* 연락처 정보와 저작권 세부 사항 */}
+        <div className="footer"></div>
       </div>
-    </div>
     </div>
   );
 };

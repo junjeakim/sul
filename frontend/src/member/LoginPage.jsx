@@ -9,51 +9,66 @@ import axios from "axios";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ userId: "", password: "" });
+  const [welcomeMessage, setWelcomeMessage] = useState("");
+  const [userProfile, setUserProfile] = useState(null);
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  // Initialize Kakao SDK
   useEffect(() => {
-    const loadKakaoSDK = () => {
-      if (window.Kakao && !window.Kakao.isInitialized()) {
-        console.log("Initializing Kakao SDK...");
-        window.Kakao.init("ed0242863785c5895aa99910e1dc3f1a");
-        console.log("Kakao SDK Initialized: ", window.Kakao.isInitialized());
-      } else {
-        console.log("Kakao SDK already initialized.");
-      }
-    };
-
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", loadKakaoSDK);
-    } else {
-      loadKakaoSDK();
+    if (window.Kakao && !window.Kakao.isInitialized()) {
+      window.Kakao.init("ed0242863785c5895aa99910e1dc3f1a");
+      console.log("Kakao SDK Initialized: ", window.Kakao.isInitialized());
     }
   }, []);
 
-  // 카카오 로그인 처리
   const handleKakaoLogin = () => {
     if (window.Kakao && window.Kakao.isInitialized()) {
       window.Kakao.Auth.login({
         scope: "profile_nickname,profile_image",
         success: (authObj) => {
           console.log("카카오 로그인 성공:", authObj);
+          const accessToken = authObj.access_token;
 
-          // 카카오 로그인 정보에서 userId, nickname, profileImage를 정확하게 가져옵니다.
-          const kakaoUser = {
-            userId: authObj.id, // authObj.id에서 userId를 정확히 가져옵니다.
-            nickname: authObj.properties?.nickname || "닉네임 없음", // properties 객체에서 nickname
-            profileImage:
-              authObj.properties?.profile_image || "기본 이미지 URL", // properties 객체에서 profile_image
-          };
+          window.Kakao.API.request({
+            url: "/v2/user/me",
+            success: (response) => {
+              console.log("카카오 사용자 정보:", response);
+              const nickname = response?.properties?.nickname || "회원님";
+              const profileImage = response?.properties?.profile_image || "";
 
-          console.log("카카오 사용자 정보:", kakaoUser); // 사용자 정보 확인
-          login(kakaoUser); // 카카오 로그인 사용자 정보 저장
-          navigate("/"); // 로그인 후 리다이렉트
+              axios
+                .post("http://localhost:8081/api/kakao/login", { accessToken })
+                .then((res) => {
+                  const { token, user } = res.data;
+                  console.log("서버 응답:", res.data);
+
+                  if (token) {
+                    localStorage.setItem("authToken", token);
+                    localStorage.setItem("user", JSON.stringify(user));
+                  }
+
+                  setUserProfile({
+                    nickname: user?.nickname || nickname,
+                    profile_image: user?.profile_image || profileImage,
+                  });
+                  setWelcomeMessage(`${user?.mName || nickname} 어서오세요!`);
+                  login(user);
+                  navigate("/");
+                })
+                .catch((err) => {
+                  console.error("카카오 로그인 서버 요청 실패:", err);
+                  alert("카카오 로그인 처리 중 오류가 발생했습니다.");
+                });
+            },
+            fail: (error) => {
+              console.error("사용자 정보 요청 실패:", error);
+              alert("사용자 정보를 불러오는 데 실패했습니다.");
+            },
+          });
         },
         fail: (error) => {
           console.error("카카오 로그인 실패:", error);
-          alert("카카오 로그인에 실패했습니다. 다시 시도해주세요.");
+          alert("카카오 로그인에 실패했습니다. 에러 메시지: " + error.message);
         },
       });
     } else {
@@ -61,7 +76,6 @@ const LoginPage = () => {
     }
   };
 
-  // 로그인 폼 제출 처리
   const handleSubmit = (e) => {
     e.preventDefault();
     const { userId, password } = formData;
@@ -71,34 +85,38 @@ const LoginPage = () => {
       return;
     }
 
-    loginUser(); // 로그인 API 호출
+    loginUser();
   };
-
-  // 로그인 버튼 클릭 시 호출되는 함수 (로그인 로직 추가)
-  const loginUser = () => {
+  // 로컬스토리지 저장
+  const loginUser = async () => {
     const { userId, password } = formData;
 
-    // 실제 로그인 API 호출
-    axios
-      .post("http://localhost:8081/api/member/login", { userId, password })
-      .then((response) => {
-        const userData = response.data;
+    console.log("로그인 요청 아이디:", userId); // 확인용 로그
+    console.log("로그인 요청 비밀번호:", password); // 확인용 로그
 
-        // 서버로부터 받은 토큰을 localStorage에 저장
-        if (response.data.token) {
-          localStorage.setItem("authToken", response.data.token);
-          console.log("저장된 토큰:", response.data.token); // 여기서 토큰 확인
-        }
-
-        login(userData); // 사용자 데이터로 로그인 처리
-        navigate("/"); // 로그인 후 리다이렉트
-      })
-      .catch((error) => {
-        alert("아이디 또는 비밀번호가 잘못되었습니다.");
+    try {
+      // 서버로 로그인 요청
+      const res = await axios.post("http://localhost:8081/api/member/login", {
+        mId: userId,
+        mPw: password,
       });
+      console.log("로그인 응답:", res.data);
+
+      const { token, user } = res.data;
+      if (token) {
+        localStorage.setItem("authToken", token);
+        localStorage.setItem("user", JSON.stringify(user));
+      }
+
+      setWelcomeMessage(`${user?.mName || userId}님 어서오세요!`);
+      login(user);
+      navigate("/");
+    } catch (error) {
+      console.error("로그인 실패:", error.response?.data || error.message);
+      alert("아이디 또는 비밀번호가 잘못되었습니다.");
+    }
   };
 
-  // 입력값 변경 시 처리
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -111,7 +129,7 @@ const LoginPage = () => {
           <h2>LOGIN</h2>
           <p>불편하신 사항이 있으신 고객센터로 문의하시기 바랍니다.</p>
         </div>
-        <form name="loginForm" onSubmit={handleSubmit} autoComplete="off">
+        <form onSubmit={handleSubmit} autoComplete="off">
           <div className="login_mid clfix">
             <div className="login_con">
               <div className="login_id">
@@ -121,7 +139,6 @@ const LoginPage = () => {
                 <input
                   type="text"
                   name="userId"
-                  id="userId"
                   placeholder="아이디"
                   value={formData.userId}
                   onChange={handleInputChange}
@@ -135,7 +152,6 @@ const LoginPage = () => {
                 <input
                   type="password"
                   name="password"
-                  id="password"
                   placeholder="비밀번호"
                   value={formData.password}
                   onChange={handleInputChange}
@@ -161,6 +177,19 @@ const LoginPage = () => {
             </div>
           </div>
         </form>
+        {welcomeMessage && (
+          <div className="welcome-message">{welcomeMessage}</div>
+        )}
+        {userProfile && (
+          <div className="user-profile">
+            <img
+              src={userProfile.profile_image}
+              alt="User Profile"
+              className="profile-image"
+            />
+            <p>{userProfile.nickname}</p>
+          </div>
+        )}
       </div>
     </div>
   );

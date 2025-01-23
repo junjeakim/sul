@@ -16,26 +16,38 @@ public class CartController {
     private CartService cartService;
 
     @GetMapping
-    public List<CartProduct> getCartItems(@RequestParam String userId) {
-        return cartService.getCartItems(userId);
+    public ResponseEntity<List<CartProduct>> getCartItems(@RequestParam("userId") String userId) {
+        try {
+            List<CartProduct> cartItems = cartService.getCartItems(userId);
+            return ResponseEntity.ok(cartItems);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(null);
+        }
     }
 
     @PostMapping
     public ResponseEntity<CartProduct> addToCart(@RequestBody CartProduct cartProduct) {
-        CartProduct savedCartProduct = cartService.addToCart(cartProduct);
-        return ResponseEntity.ok(savedCartProduct);
+        try {
+            CartProduct savedCartProduct = cartService.addToCart(cartProduct);
+            return ResponseEntity.ok(savedCartProduct);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(null);
+        }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CartProduct> updateCartItem(@PathVariable Integer id, @RequestBody CartProduct cartProduct) {
         Optional<CartProduct> updatedCartProduct = cartService.updateCartItem(id, cartProduct);
-        return updatedCartProduct.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return updatedCartProduct.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCartItem(@PathVariable Integer id) {
-        cartService.deleteCartItem(id);
-        return ResponseEntity.ok().build();
+        try {
+            cartService.deleteCartItem(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 }

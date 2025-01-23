@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./style/style.css"; // CSS 파일 경로
 import Box from "@mui/joy/Box";
 import Typography from "@mui/joy/Typography";
@@ -26,26 +26,57 @@ const MainPage = () => {
     fetchProducts();
   }, []);
 
-  const handleCardClick = (product) => {
-    setModalContent(product);
-  };
+  // JWT 토큰이 만료되었는지 확인하는 함수
+  const isTokenExpired = (token) => {
+    if (!token || typeof token !== "string") {
+      console.error("토큰이 존재하지 않거나 올바르지 않은 형식입니다.");
+      return true;
+    }
 
-  const closeModal = () => {
-    setModalContent(null);
+    try {
+      const parts = token.split(".");
+      if (parts.length !== 3) {
+        console.error(
+          "올바르지 않은 토큰 형식입니다. JWT는 세 부분으로 구성되어야 합니다."
+        );
+        return true;
+      }
+
+      const base64Url = parts[1]; // JWT의 payload 부분
+      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const decodedToken = JSON.parse(atob(base64));
+
+      console.log("디코딩된 토큰:", decodedToken);
+
+      const expirationTime = decodedToken.exp * 1000; // 만료 시간 (밀리초 단위)
+      const currentTime = Date.now();
+
+      if (currentTime >= expirationTime) {
+        console.error("토큰이 만료되었습니다.");
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      console.error("토큰 디코딩 오류:", e);
+      return true;
+    }
   };
 
   const handlePayment = async (product) => {
-    const amount = parseInt(product.price.replace(/,|원/g, ""), 10); // 콤마와 "원" 제거 후 숫자로 변환
+    const amount = parseInt(product.price.replace(/,|원/g, ""), 10);
     const orderData = {
-      orderId: `${Date.now()}`, // 고유 주문 ID 생성
+      orderId: `${Date.now()}`,
       orderName: product.name,
       amount,
     };
 
-    const token = localStorage.getItem("authToken"); // 'authToken'은 저장된 토큰의 키
+    let token = localStorage.getItem("authToken");
 
-    if (!token || !isTokenValid(token)) {
-      alert("유효한 토큰이 없습니다. 로그인 후 다시 시도해주세요.");
+    if (!token || isTokenExpired(token)) {
+      alert("로그인이 필요합니다. 다시 시도해주세요.");
+      localStorage.removeItem("authToken"); // 만약 토큰이 만료되었으면 로컬 저장소에서 토큰 삭제
+      window.location.href = "/login"; // 로그인 페이지로 리다이렉트
       return;
     }
 
@@ -55,20 +86,26 @@ const MainPage = () => {
         orderData,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // 올바른 템플릿 리터럴 사용
-            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
       if (response.data.paymentUrl) {
-        window.location.href = response.data.paymentUrl; // 결제 페이지로 이동
+        window.location.href = response.data.paymentUrl;
       } else {
-        alert("결제 URL을 가져오는 데 실패했습니다.");
+        alert("결제 URL 생성에 실패했습니다.");
       }
     } catch (error) {
-      alert("결제 요청 중 오류가 발생했습니다.");
-      console.error("결제 오류:", error.response?.data || error.message);
+      if (error.response && error.response.status === 401) {
+        // 401 오류가 발생하면 토큰 만료로 간주하고 로그아웃 처리
+        alert("토큰이 만료되었습니다. 다시 로그인 해주세요.");
+        localStorage.removeItem("authToken");
+        window.location.href = "/login"; // 로그인 화면으로 리다이렉트
+      } else {
+        console.error("결제 요청 중 오류:", error);
+        alert("결제 요청 중 오류가 발생했습니다.");
+      }
     }
   };
 
@@ -79,19 +116,12 @@ const MainPage = () => {
   const handleAddToWishlist = (product) => {
     alert(`${product.name}이(가) 관심상품으로 등록되었습니다.`);
   };
+  const handleCardClick = (product) => {
+    setModalContent(product);
+  };
 
-  const isTokenValid = (token) => {
-    if (!token) return false;
-    try {
-      const decodedToken = JSON.parse(atob(token.split(".")[1]));
-      console.log("디코딩된 토큰:", decodedToken); // 디코딩된 토큰 출력
-      const expirationTime = decodedToken.exp * 1000;
-      const currentTime = Date.now();
-      return currentTime < expirationTime;
-    } catch (e) {
-      console.error("토큰 디코딩 오류:", e);
-      return false;
-    }
+  const closeModal = () => {
+    setModalContent(null);
   };
 
   const renderContent = () => (
@@ -119,7 +149,7 @@ const MainPage = () => {
             </div>
             <div className="itemTxtArea product-info">
               <span>{product.subject}</span>
-              <br/>
+              <br />
               <span>{product.price}원</span>
             </div>
           </div>

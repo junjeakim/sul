@@ -14,8 +14,7 @@ public class CartService {
     private CartProductRepository cartProductRepository;
 
     public List<CartProduct> getCartItems(String userId) {
-        // Implement logic to fetch cart items based on userId
-        return cartProductRepository.findAll(); // Example logic
+        return cartProductRepository.findAll(); // 단순하게 모든 아이템을 가져옴
     }
 
     public CartProduct addToCart(CartProduct cartProduct) {
